@@ -1,0 +1,36 @@
+---
+const { name, email, socialLinks } = Astro.props;
+---
+
+<footer class="mt-20 pt-8 border-t border-[#93bfe9]/30 text-center">
+    <p class="text-sm text-[#103a62]/70 mb-4">
+        © 2024 {name}. All rights reserved.
+    </p>
+    <div
+        class="flex items-center justify-center gap-4 text-sm text-[#103a62]/70"
+    >
+        <a
+            href={`mailto:${email}`}
+            class="hover:text-[#56a2e8] transition-colors"
+        >
+            Email
+        </a>
+        <span>•</span>
+        {
+            socialLinks.map(
+                (link: { name: string; url: string }, index: number) => (
+                    <>
+                        <a
+                            href={link.url}
+                            target="_blank"
+                            class="hover:text-[#56a2e8] transition-colors"
+                        >
+                            {link.name}
+                        </a>
+                        {index < socialLinks.length - 1 && <span>•</span>}
+                    </>
+                ),
+            )
+        }
+    </div>
+</footer>

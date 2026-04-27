@@ -1,0 +1,10 @@
+---
+const { bio } = Astro.props;
+---
+
+<section>
+    <h2 class="text-3xl font-bold text-[#05080b] mb-6">About</h2>
+    <div class="space-y-4 text-[#103a62]/90 leading-relaxed text-lg">
+        {bio.map((paragraph: string) => <p set:html={paragraph} />)}
+    </div>
+</section>

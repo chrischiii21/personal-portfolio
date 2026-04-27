@@ -1,0 +1,33 @@
+---
+const { categories } = Astro.props;
+---
+
+<div>
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl font-bold text-[#05080b]">Tech Stack</h2>
+        <a
+            href="#"
+            class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
+        >
+            View All →
+        </a>
+    </div>
+    <div class="space-y-6">
+        {
+            categories.map((category: { name: string; items: string[] }) => (
+                <div>
+                    <h3 class="text-sm font-semibold text-[#56a2e8] uppercase tracking-wide mb-3">
+                        {category.name}
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        {category.items.map((item: string) => (
+                            <span class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium">
+                                {item}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</div>
