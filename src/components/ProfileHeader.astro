@@ -1,0 +1,54 @@
+---
+const { name, location, title, badge, email } = Astro.props;
+---
+
+<header class="text-center mb-12">
+    <div
+        class="w-32 h-32 mx-auto mb-6 rounded-full bg-linear-to-br from-[#103a62] to-[#56a2e8] flex items-center justify-center text-6xl shadow-lg"
+    >
+        👨‍💻
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-[#05080b] mb-2">
+        {name}
+    </h1>
+    <div class="flex items-center justify-center gap-2 mb-3">
+        <span class="w-2 h-2 bg-[#56a2e8] rounded-full"></span>
+        <p class="text-[#103a62]/70">{location}</p>
+    </div>
+    <p class="text-xl text-[#103a62] font-medium mb-6">
+        {title}
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+        <a
+            href={`mailto:${email}`}
+            class="bg-[#103a62] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer shadow-md"
+        >
+            Send Email
+        </a>
+        <a
+            href="https://calendly.com"
+            target="_blank"
+            class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-2.5 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
+        >
+            Schedule a Call
+        </a>
+        <a
+            href="/resume.pdf"
+            download
+            class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-2.5 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
+        >
+            Download Resume
+        </a>
+    </div>
+
+    <!-- Achievement Badge -->
+    <div
+        class="inline-block bg-yellow-400/20 border border-yellow-500/40 rounded-lg px-4 py-2"
+    >
+        <p class="text-sm text-[#103a62] font-medium">
+            {badge}
+        </p>
+    </div>
+</header>

@@ -1,0 +1,25 @@
+---
+const { description, email } = Astro.props;
+---
+
+<section>
+    <h2 class="text-3xl font-bold text-[#05080b] mb-6">Speaking</h2>
+    <p class="text-[#103a62]/90 leading-relaxed text-lg mb-6">
+        {description}
+    </p>
+    <div class="flex flex-wrap gap-3">
+        <a
+            href={`mailto:${email}`}
+            class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
+        >
+            Get in touch
+        </a>
+        <a
+            href="https://calendly.com"
+            target="_blank"
+            class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-3 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
+        >
+            Schedule a Call
+        </a>
+    </div>
+</section>

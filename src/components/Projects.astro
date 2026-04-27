@@ -1,0 +1,44 @@
+---
+const { projects } = Astro.props;
+---
+
+<section>
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl font-bold text-[#05080b]">Recent Projects</h2>
+        <a
+            href="#"
+            class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
+        >
+            View All →
+        </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+        {
+            projects.map(
+                (project: {
+                    title: string;
+                    description: string;
+                    url: string;
+                    domain: string;
+                }) => (
+                    <a
+                        href={project.url}
+                        target="_blank"
+                        class="block bg-white border border-[#93bfe9]/50 rounded-xl p-6 hover:shadow-lg hover:border-[#56a2e8] transition-all group cursor-pointer"
+                    >
+                        <h3 class="text-lg font-bold text-[#05080b] mb-2 group-hover:text-[#56a2e8] transition-colors">
+                            {project.title}
+                        </h3>
+                        <p class="text-sm text-[#103a62]/70 mb-3">
+                            {project.description}
+                        </p>
+                        <p class="text-xs text-[#56a2e8] font-medium">
+                            {project.domain}
+                        </p>
+                    </a>
+                ),
+            )
+        }
+    </div>
+</section>

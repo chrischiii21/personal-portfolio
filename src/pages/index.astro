@@ -1,5 +1,168 @@
 ---
 import "../styles/global.css";
+import ProfileHeader from "../components/ProfileHeader.astro";
+import About from "../components/About.astro";
+import TechStack from "../components/TechStack.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import Certifications from "../components/Certifications.astro";
+import Gallery from "../components/Gallery.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import Speaking from "../components/Speaking.astro";
+import Footer from "../components/Footer.astro";
+
+// Profile Data
+const profile = {
+	name: "Christy Montejo",
+	location: "Cebu City, Philippines",
+	title: "Front-end Web Developer \\ UI/UX Designer \\ Student Leader",
+	badge: "🎓 Class of 2026 / Astro Developer",
+	email: "christy@example.com",
+};
+
+// About Bio
+const bio = [
+	`I'm a front-end developer and UI/UX designer specializing in high-performance web applications built with <strong class="text-[#05080b]">Astro</strong>, <strong class="text-[#05080b]">React</strong>, and <strong class="text-[#05080b]">Tailwind CSS</strong>. I focus on "sales-first" design philosophies—creating digital experiences for trade-specific industries that prioritize lead generation and conversion optimization.`,
+	`Beyond code, I am deeply involved in student leadership, currently serving as a member of the Finance Committee and the Graduating Council for the Class of 2026. I bridge the gap between aesthetic design and functional, ROI-driven development.`,
+];
+
+// Tech Stack
+const techStack = [
+	{
+		name: "Frontend",
+		items: [
+			"JavaScript",
+			"TypeScript",
+			"React",
+			"Astro",
+			"Tailwind CSS",
+			"Vite",
+		],
+	},
+	{
+		name: "Tools & Runtime",
+		items: ["Bun", "Node.js", "Git", "GitHub"],
+	},
+	{
+		name: "Design & Strategy",
+		items: ["UI/UX Design", "CRO", "Sales-First Layouts"],
+	},
+];
+
+// Experience
+const experiences = [
+	{
+		title: "OJT / Teaching Intern",
+		company: "[Insert Institution Name]",
+		period: "2026 – Present",
+	},
+	{
+		title: "Finance Committee Member",
+		company: "Graduating Council 2026",
+		period: "2025 – 2026",
+	},
+	{
+		title: "Part-time Web Developer",
+		company: "Freelance / Project-Based",
+		period: "2025 – Present",
+	},
+	{
+		title: "B.S. Information Technology",
+		company: "[Insert University Name]",
+		period: "2022 – 2026",
+	},
+];
+
+// Projects
+const projects = [
+	{
+		title: "BuildPro (SkillGrid)",
+		description:
+			"A digital marketing platform and template repository for trade contractors (HVAC, Plumbing)",
+		url: "https://buildpro.dev",
+		domain: "buildpro.dev",
+	},
+	{
+		title: "Argao Convergence 2025",
+		description:
+			'Design and organization for the "Youth Leading the Change" summit, including all visual branding',
+		url: "https://argao2025.com",
+		domain: "argao2025.com",
+	},
+	{
+		title: "Graduation Logistics System",
+		description:
+			"Automated tracker for fee collections and pictorial schedules to streamline council operations",
+		url: "https://grad-tracker.app",
+		domain: "grad-tracker.app",
+	},
+];
+
+// Certifications
+const certifications = [
+	{
+		title: "Event Organizer",
+		issuer: "Argao Convergence 2025",
+	},
+	{
+		title: "Finance Committee Representative",
+		issuer: "Graduating Council",
+	},
+	{
+		title: "Astro Framework Proficiency",
+		issuer: "Frontend Development",
+	},
+];
+
+// Gallery
+const gallery = [
+	{
+		label: "BuildPro Desktop",
+		gradient: "bg-linear-to-br from-[#103a62] to-[#56a2e8]",
+	},
+	{
+		label: "BuildPro Mobile",
+		gradient: "bg-linear-to-br from-[#56a2e8] to-[#93bfe9]",
+	},
+	{
+		label: "Argao Branding",
+		gradient: "bg-linear-to-br from-[#93bfe9] to-[#56a2e8]",
+	},
+	{
+		label: "Code Snippet",
+		gradient: "bg-linear-to-br from-[#56a2e8] to-[#103a62]",
+	},
+	{
+		label: "Git Workflow",
+		gradient: "bg-linear-to-br from-[#103a62] to-[#93bfe9]",
+	},
+	{
+		label: "UI Components",
+		gradient: "bg-linear-to-br from-[#93bfe9] to-[#103a62]",
+	},
+	{
+		label: "Design System",
+		gradient: "bg-linear-to-br from-[#56a2e8] to-[#93bfe9]",
+	},
+	{
+		label: "Astro Project",
+		gradient: "bg-linear-to-br from-[#103a62] to-[#56a2e8]",
+	},
+];
+
+// Social Links
+const socialLinks = [
+	{ name: "LinkedIn", url: "https://linkedin.com" },
+	{ name: "GitHub", url: "https://github.com" },
+	{ name: "Twitter", url: "https://twitter.com" },
+];
+
+// Speaking
+const speaking = {
+	description:
+		"Available for speaking at events about software development, cloud architecture, and emerging technologies.",
+	email: profile.email,
+};
 ---
 
 <!doctype html>
@@ -7,7 +170,7 @@ import "../styles/global.css";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Christy Montejo - Front-end Web Developer</title>
+		<title>{profile.name} - Front-end Web Developer</title>
 		<meta
 			name="description"
 			content="Front-end developer and UI/UX designer specializing in high-performance web applications with Astro, React, and Tailwind CSS."
@@ -22,546 +185,38 @@ import "../styles/global.css";
 	</head>
 	<body class="bg-[#f5f8fb] text-[#05080b] font-sans antialiased">
 		<div class="min-h-screen max-w-4xl mx-auto px-6 py-12 md:py-16">
-			<!-- Profile Header -->
-			<header class="text-center mb-12">
-				<div
-					class="w-32 h-32 mx-auto mb-6 rounded-full bg-linear-to-br from-[#103a62] to-[#56a2e8] flex items-center justify-center text-6xl shadow-lg"
-				>
-					👨‍💻
-				</div>
-				<h1 class="text-4xl md:text-5xl font-bold text-[#05080b] mb-2">
-					Christy Montejo
-				</h1>
-				<div class="flex items-center justify-center gap-2 mb-3">
-					<span class="w-2 h-2 bg-[#56a2e8] rounded-full"></span>
-					<p class="text-[#103a62]/70">Cebu City, Philippines</p>
-				</div>
-				<p class="text-xl text-[#103a62] font-medium mb-6">
-					Front-end Web Developer \ UI/UX Designer \ Student Leader
-				</p>
+			<ProfileHeader {...profile} />
 
-				<!-- CTA Buttons -->
-				<div
-					class="flex flex-wrap items-center justify-center gap-3 mb-6"
-				>
-					<a
-						href="mailto:christy@example.com"
-						class="bg-[#103a62] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer shadow-md"
-					>
-						Send Email
-					</a>
-					<a
-						href="https://calendly.com"
-						target="_blank"
-						class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-2.5 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
-					>
-						Schedule a Call
-					</a>
-					<a
-						href="/resume.pdf"
-						download
-						class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-2.5 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
-					>
-						Download Resume
-					</a>
-				</div>
-
-				<!-- Achievement Badge -->
-				<div
-					class="inline-block bg-yellow-400/20 border border-yellow-500/40 rounded-lg px-4 py-2"
-				>
-					<p class="text-sm text-[#103a62] font-medium">
-						� Class of 2026 / Astro Developer
-					</p>
-				</div>
-			</header>
-
-			<!-- Main Content -->
 			<main class="space-y-16">
-				<!-- About -->
-				<section>
-					<h2 class="text-3xl font-bold text-[#05080b] mb-6">
-						About
-					</h2>
-					<div
-						class="space-y-4 text-[#103a62]/90 leading-relaxed text-lg"
-					>
-						<p>
-							I'm a front-end developer and UI/UX designer
-							specializing in high-performance web applications
-							built with <strong class="text-[#05080b]"
-								>Astro</strong
-							>, <strong class="text-[#05080b]">React</strong>,
-							and <strong class="text-[#05080b]"
-								>Tailwind CSS</strong
-							>. I focus on "sales-first" design
-							philosophies—creating digital experiences for
-							trade-specific industries that prioritize lead
-							generation and conversion optimization.
-						</p>
-						<p>
-							Beyond code, I am deeply involved in student
-							leadership, currently serving as a member of the
-							Finance Committee and the Graduating Council for the
-							Class of 2026. I bridge the gap between aesthetic
-							design and functional, ROI-driven development.
-						</p>
-					</div>
-				</section>
+				<About bio={bio} />
 
-				<!-- Tech Stack & Experience - 2 Column Layout -->
 				<section class="grid lg:grid-cols-[1.3fr_1fr] gap-12">
-					<!-- Tech Stack Column -->
-					<div>
-						<div class="flex items-center justify-between mb-6">
-							<h2 class="text-3xl font-bold text-[#05080b]">
-								Tech Stack
-							</h2>
-							<a
-								href="#"
-								class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
-								>View All →</a
-							>
-						</div>
-						<div class="space-y-6">
-							<div>
-								<h3
-									class="text-sm font-semibold text-[#56a2e8] uppercase tracking-wide mb-3"
-								>
-									Frontend
-								</h3><div class="flex flex-wrap gap-2">
-									<span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>JavaScript</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>TypeScript</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>React</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>Astro</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>Tailwind CSS</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>Vite</span
-									>
-								</div>
-							</div>
-							<div>
-								<h3
-									class="text-sm font-semibold text-[#56a2e8] uppercase tracking-wide mb-3"
-								>
-									Tools & Runtime
-								</h3><div class="flex flex-wrap gap-2">
-									<span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>Bun</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>Node.js</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>Git</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>GitHub</span
-									>
-								</div>
-							</div>
-							<div>
-								<h3
-									class="text-sm font-semibold text-[#56a2e8] uppercase tracking-wide mb-3"
-								>
-									Design & Strategy
-								</h3><div class="flex flex-wrap gap-2">
-									<span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>UI/UX Design</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>CRO</span
-									><span
-										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
-										>Sales-First Layouts</span
-									>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Experience Column -->
-					<div>
-						<h2 class="text-3xl font-bold text-[#05080b] mb-6">
-							Experience
-						</h2>
-						<div class="relative">
-							<div
-								class="absolute left-[7px] top-2 bottom-2 w-0.5 bg-[#93bfe9]/30"
-							>
-							</div>
-							<div class="space-y-8">
-								<div class="relative pl-8">
-									<div
-										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
-									>
-									</div><h3
-										class="text-xl font-bold text-[#05080b]"
-									>
-										OJT / Teaching Intern
-									</h3><p
-										class="text-[#103a62] font-medium mb-1"
-									>
-										[Insert Institution Name]
-									</p><p class="text-sm text-[#103a62]/70">
-										2026 – Present
-									</p>
-								</div>
-								<div class="relative pl-8">
-									<div
-										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
-									>
-									</div><h3
-										class="text-xl font-bold text-[#05080b]"
-									>
-										Finance Committee Member
-									</h3><p
-										class="text-[#103a62] font-medium mb-1"
-									>
-										Graduating Council 2026
-									</p><p class="text-sm text-[#103a62]/70">
-										2025 – 2026
-									</p>
-								</div>
-								<div class="relative pl-8">
-									<div
-										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
-									>
-									</div><h3
-										class="text-xl font-bold text-[#05080b]"
-									>
-										Part-time Web Developer
-									</h3><p
-										class="text-[#103a62] font-medium mb-1"
-									>
-										Freelance / Project-Based
-									</p><p class="text-sm text-[#103a62]/70">
-										2025 – Present
-									</p>
-								</div>
-								<div class="relative pl-8">
-									<div
-										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
-									>
-									</div><h3
-										class="text-xl font-bold text-[#05080b]"
-									>
-										B.S. Information Technology
-									</h3><p
-										class="text-[#103a62] font-medium mb-1"
-									>
-										[Insert University Name]
-									</p><p class="text-sm text-[#103a62]/70">
-										2022 – 2026
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
+					<TechStack categories={techStack} />
+					<Experience experiences={experiences} />
 				</section>
 
-				<!-- Recent Projects -->
-				<section>
-					<div class="flex items-center justify-between mb-6">
-						<h2 class="text-3xl font-bold text-[#05080b]">
-							Recent Projects
-						</h2>
-						<a
-							href="#"
-							class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
-							>View All →</a
-						>
-					</div>
+				<Projects projects={projects} />
 
-					<div class="grid md:grid-cols-2 gap-4">
-						<a
-							href="https://buildpro.dev"
-							target="_blank"
-							class="block bg-white border border-[#93bfe9]/50 rounded-xl p-6 hover:shadow-lg hover:border-[#56a2e8] transition-all group cursor-pointer"
-						>
-							<h3
-								class="text-lg font-bold text-[#05080b] mb-2 group-hover:text-[#56a2e8] transition-colors"
-							>
-								BuildPro (SkillGrid)
-							</h3>
-							<p class="text-sm text-[#103a62]/70 mb-3">
-								A digital marketing platform and template
-								repository for trade contractors (HVAC,
-								Plumbing)
-							</p>
-							<p class="text-xs text-[#56a2e8] font-medium">
-								buildpro.dev
-							</p>
-						</a>
+				<Certifications certifications={certifications} />
 
-						<a
-							href="https://argao2025.com"
-							target="_blank"
-							class="block bg-white border border-[#93bfe9]/50 rounded-xl p-6 hover:shadow-lg hover:border-[#56a2e8] transition-all group cursor-pointer"
-						>
-							<h3
-								class="text-lg font-bold text-[#05080b] mb-2 group-hover:text-[#56a2e8] transition-colors"
-							>
-								Argao Convergence 2025
-							</h3>
-							<p class="text-sm text-[#103a62]/70 mb-3">
-								Design and organization for the "Youth Leading
-								the Change" summit, including all visual
-								branding
-							</p>
-							<p class="text-xs text-[#56a2e8] font-medium">
-								argao2025.com
-							</p>
-						</a>
+				<Gallery items={gallery} />
 
-						<a
-							href="https://grad-tracker.app"
-							target="_blank"
-							class="block bg-white border border-[#93bfe9]/50 rounded-xl p-6 hover:shadow-lg hover:border-[#56a2e8] transition-all group cursor-pointer"
-						>
-							<h3
-								class="text-lg font-bold text-[#05080b] mb-2 group-hover:text-[#56a2e8] transition-colors"
-							>
-								Graduation Logistics System
-							</h3>
-							<p class="text-sm text-[#103a62]/70 mb-3">
-								Automated tracker for fee collections and
-								pictorial schedules to streamline council
-								operations
-							</p>
-							<p class="text-xs text-[#56a2e8] font-medium">
-								grad-tracker.app
-							</p>
-						</a>
-					</div>
-				</section>
+				<SocialLinks links={socialLinks} />
 
-				<!-- Recent Certifications -->
-				<section>
-					<div class="flex items-center justify-between mb-6">
-						<h2 class="text-3xl font-bold text-[#05080b]">
-							Recent Certifications
-						</h2>
-						<a
-							href="#"
-							class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
-							>View All →</a
-						>
-					</div>
-
-					<div class="grid md:grid-cols-2 gap-4">
-						<div
-							class="bg-white border border-[#93bfe9]/50 rounded-xl p-5"
-						>
-							<h3 class="text-base font-bold text-[#05080b] mb-1">
-								Event Organizer
-							</h3>
-							<p class="text-sm text-[#103a62]/70">
-								Argao Convergence 2025
-							</p>
-						</div>
-
-						<div
-							class="bg-white border border-[#93bfe9]/50 rounded-xl p-5"
-						>
-							<h3 class="text-base font-bold text-[#05080b] mb-1">
-								Finance Committee Representative
-							</h3>
-							<p class="text-sm text-[#103a62]/70">
-								Graduating Council
-							</p>
-						</div>
-
-						<div
-							class="bg-white border border-[#93bfe9]/50 rounded-xl p-5"
-						>
-							<h3 class="text-base font-bold text-[#05080b] mb-1">
-								Astro Framework Proficiency
-							</h3>
-							<p class="text-sm text-[#103a62]/70">
-								Frontend Development
-							</p>
-						</div>
-					</div>
-				</section>
-
-				<!-- Gallery -->
-				<section>
-					<h2 class="text-3xl font-bold text-[#05080b] mb-6">
-						Gallery
-					</h2>
-					<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-						<div
-							class="aspect-square bg-linear-to-br from-[#103a62] to-[#56a2e8] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center"
-						>
-							<div class="text-white text-center p-4">
-								<p class="text-xs font-medium">
-									BuildPro Desktop
-								</p>
-							</div>
-						</div>
-
-						<div
-							class="aspect-square bg-linear-to-br from-[#56a2e8] to-[#93bfe9] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center"
-						>
-							<div class="text-white text-center p-4">
-								<p class="text-xs font-medium">
-									BuildPro Mobile
-								</p>
-							</div>
-						</div>
-
-						<div
-							class="aspect-square bg-linear-to-br from-[#93bfe9] to-[#56a2e8] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center"
-						>
-							<div class="text-white text-center p-4">
-								<p class="text-xs font-medium">
-									Argao Branding
-								</p>
-							</div>
-						</div>
-
-						<div
-							class="aspect-square bg-linear-to-br from-[#56a2e8] to-[#103a62] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center"
-						>
-							<div class="text-white text-center p-4">
-								<p class="text-xs font-medium">Code Snippet</p>
-							</div>
-						</div>
-
-						<div
-							class="aspect-square bg-linear-to-br from-[#103a62] to-[#93bfe9] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center"
-						>
-							<div class="text-white text-center p-4">
-								<p class="text-xs font-medium">Git Workflow</p>
-							</div>
-						</div>
-
-						<div
-							class="aspect-square bg-linear-to-br from-[#93bfe9] to-[#103a62] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center"
-						>
-							<div class="text-white text-center p-4">
-								<p class="text-xs font-medium">UI Components</p>
-							</div>
-						</div>
-
-						<div
-							class="aspect-square bg-linear-to-br from-[#56a2e8] to-[#93bfe9] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center"
-						>
-							<div class="text-white text-center p-4">
-								<p class="text-xs font-medium">Design System</p>
-							</div>
-						</div>
-
-						<div
-							class="aspect-square bg-linear-to-br from-[#103a62] to-[#56a2e8] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center"
-						>
-							<div class="text-white text-center p-4">
-								<p class="text-xs font-medium">Astro Project</p>
-							</div>
-						</div>
-					</div>
-				</section>
+				<Speaking {...speaking} />
 			</main>
 
-			<!-- Social Links -->
-			<section>
-				<h2 class="text-3xl font-bold text-[#05080b] mb-6">
-					Social Links
-				</h2>
-				<div class="flex flex-wrap gap-3">
-					<a
-						href="https://linkedin.com"
-						target="_blank"
-						class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
-					>
-						LinkedIn
-					</a>
-					<a
-						href="https://github.com"
-						target="_blank"
-						class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
-					>
-						GitHub
-					</a>
-					<a
-						href="https://twitter.com"
-						target="_blank"
-						class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
-					>
-						Twitter
-					</a>
-				</div>
-			</section>
-
-			<!-- Contact -->
-			<section>
-				<h2 class="text-3xl font-bold text-[#05080b] mb-6">Speaking</h2>
-				<p class="text-[#103a62]/90 leading-relaxed text-lg mb-6">
-					Available for speaking at events about software development,
-					cloud architecture, and emerging technologies.
-				</p>
-				<div class="flex flex-wrap gap-3">
-					<a
-						href="mailto:christy@example.com"
-						class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
-					>
-						Get in touch
-					</a>
-					<a
-						href="https://calendly.com"
-						target="_blank"
-						class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-3 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
-					>
-						Schedule a Call
-					</a>
-				</div>
-			</section>
+			<Footer
+				name={profile.name}
+				email={profile.email}
+				socialLinks={socialLinks}
+			/>
 		</div>
 
-		<!-- Footer -->
-		<footer class="mt-20 pt-8 border-t border-[#93bfe9]/30 text-center">
-			<p class="text-sm text-[#103a62]/70 mb-4">
-				© 2024 Christy Montejo. All rights reserved.
-			</p>
-			<div
-				class="flex items-center justify-center gap-4 text-sm text-[#103a62]/70"
-			>
-				<a
-					href="mailto:christy@example.com"
-					class="hover:text-[#56a2e8] transition-colors">Email</a
-				>
-				<span>•</span>
-				<a
-					href="https://linkedin.com"
-					target="_blank"
-					class="hover:text-[#56a2e8] transition-colors">LinkedIn</a
-				>
-				<span>•</span>
-				<a
-					href="https://github.com"
-					target="_blank"
-					class="hover:text-[#56a2e8] transition-colors">GitHub</a
-				>
-			</div>
-		</footer>
+		<style>
+			* {
+				font-family: "Inter", sans-serif;
+			}
+		</style>
 	</body>
-
-	<style>
-		* {
-			font-family: "Inter", sans-serif;
-		}
-	</style>
 </html>

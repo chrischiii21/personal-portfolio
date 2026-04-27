@@ -1,0 +1,20 @@
+---
+const { items } = Astro.props;
+---
+
+<section>
+    <h2 class="text-3xl font-bold text-[#05080b] mb-6">Gallery</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {
+            items.map((item: { label: string; gradient: string }) => (
+                <div
+                    class={`aspect-square ${item.gradient} rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer flex items-center justify-center`}
+                >
+                    <div class="text-white text-center p-4">
+                        <p class="text-xs font-medium">{item.label}</p>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</section>

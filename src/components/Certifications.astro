@@ -1,0 +1,28 @@
+---
+const { certifications } = Astro.props;
+---
+
+<section>
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl font-bold text-[#05080b]">Recent Certifications</h2>
+        <a
+            href="#"
+            class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
+        >
+            View All →
+        </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+        {
+            certifications.map((cert: { title: string; issuer: string }) => (
+                <div class="bg-white border border-[#93bfe9]/50 rounded-xl p-5">
+                    <h3 class="text-base font-bold text-[#05080b] mb-1">
+                        {cert.title}
+                    </h3>
+                    <p class="text-sm text-[#103a62]/70">{cert.issuer}</p>
+                </div>
+            ))
+        }
+    </div>
+</section>
