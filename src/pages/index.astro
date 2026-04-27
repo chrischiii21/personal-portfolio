@@ -1,167 +1,174 @@
 ---
 import "../styles/global.css";
-import ProfileHeader from "../components/ProfileHeader.astro";
-import About from "../components/About.astro";
-import TechStack from "../components/TechStack.astro";
-import Experience from "../components/Experience.astro";
-import Projects from "../components/Projects.astro";
-import Certifications from "../components/Certifications.astro";
-import Gallery from "../components/Gallery.astro";
-import SocialLinks from "../components/SocialLinks.astro";
-import Speaking from "../components/Speaking.astro";
-import Footer from "../components/Footer.astro";
+import ProfileSidebar from "../components/ProfileSidebar.astro";
+import MainContent from "../components/MainContent.astro";
+import ProjectsSection from "../components/ProjectsSection.astro";
+import ExperienceSection from "../components/ExperienceSection.astro";
+import GallerySection from "../components/GallerySection.astro";
 
 // Profile Data
 const profile = {
 	name: "Christy Montejo",
+	username: "christymaj",
+	pronouns: "she/her",
 	location: "Cebu City, Philippines",
-	title: "Front-end Web Developer \\ UI/UX Designer \\ Student Leader",
-	badge: "🎓 Class of 2026 / Astro Developer",
 	email: "christy@example.com",
+	followers: 8,
+	following: 6,
 };
 
-// About Bio
-const bio = [
-	`I'm a front-end developer and UI/UX designer specializing in high-performance web applications built with <strong class="text-[#05080b]">Astro</strong>, <strong class="text-[#05080b]">React</strong>, and <strong class="text-[#05080b]">Tailwind CSS</strong>. I focus on "sales-first" design philosophies—creating digital experiences for trade-specific industries that prioritize lead generation and conversion optimization.`,
-	`Beyond code, I am deeply involved in student leadership, currently serving as a member of the Finance Committee and the Graduating Council for the Class of 2026. I bridge the gap between aesthetic design and functional, ROI-driven development.`,
-];
-
-// Tech Stack
-const techStack = [
-	{
-		name: "Frontend",
-		items: [
-			"JavaScript",
-			"TypeScript",
-			"React",
-			"Astro",
-			"Tailwind CSS",
-			"Vite",
-		],
-	},
-	{
-		name: "Tools & Runtime",
-		items: ["Bun", "Node.js", "Git", "GitHub"],
-	},
-	{
-		name: "Design & Strategy",
-		items: ["UI/UX Design", "CRO", "Sales-First Layouts"],
-	},
-];
-
-// Experience
-const experiences = [
-	{
-		title: "OJT / Teaching Intern",
-		company: "[Insert Institution Name]",
-		period: "2026 – Present",
-	},
-	{
-		title: "Finance Committee Member",
-		company: "Graduating Council 2026",
-		period: "2025 – 2026",
-	},
-	{
-		title: "Part-time Web Developer",
-		company: "Freelance / Project-Based",
-		period: "2025 – Present",
-	},
-	{
-		title: "B.S. Information Technology",
-		company: "[Insert University Name]",
-		period: "2022 – 2026",
-	},
-];
-
-// Projects
+// Projects Data
 const projects = [
 	{
 		title: "BuildPro (SkillGrid)",
 		description:
 			"A digital marketing platform and template repository for trade contractors (HVAC, Plumbing)",
 		url: "https://buildpro.dev",
-		domain: "buildpro.dev",
+		tech: ["Astro", "React", "Tailwind CSS", "TypeScript"],
 	},
 	{
 		title: "Argao Convergence 2025",
 		description:
 			'Design and organization for the "Youth Leading the Change" summit, including all visual branding',
 		url: "https://argao2025.com",
-		domain: "argao2025.com",
+		tech: ["UI/UX Design", "Branding", "Event Management"],
 	},
 	{
 		title: "Graduation Logistics System",
 		description:
 			"Automated tracker for fee collections and pictorial schedules to streamline council operations",
 		url: "https://grad-tracker.app",
-		domain: "grad-tracker.app",
+		tech: ["React", "Node.js", "Database", "Automation"],
 	},
 ];
 
-// Certifications
-const certifications = [
+// Experience Data
+const experiences = [
 	{
-		title: "Event Organizer",
-		issuer: "Argao Convergence 2025",
+		title: "OJT / Teaching Intern",
+		company: "[Insert Institution Name]",
+		period: "2026 – Present",
+		description:
+			"Assisting in curriculum development and student mentorship programs.",
 	},
 	{
-		title: "Finance Committee Representative",
-		issuer: "Graduating Council",
+		title: "Finance Committee Member",
+		company: "Graduating Council 2026",
+		period: "2025 – 2026",
+		description:
+			"Managing budget allocation and financial planning for graduation events.",
 	},
 	{
-		title: "Astro Framework Proficiency",
-		issuer: "Frontend Development",
+		title: "Part-time Web Developer",
+		company: "Freelance / Project-Based",
+		period: "2025 – Present",
+		description:
+			"Building custom web solutions for local businesses and startups.",
+	},
+	{
+		title: "B.S. Information Technology",
+		company: "[Insert University Name]",
+		period: "2022 – 2026",
+		description: "Specializing in web development and UI/UX design.",
 	},
 ];
 
-// Gallery
+// Gallery Data
 const gallery = [
 	{
 		label: "BuildPro Desktop",
-		gradient: "bg-linear-to-br from-[#103a62] to-[#56a2e8]",
+		gradient: "bg-gradient-to-br from-blue-600 to-blue-800",
 	},
 	{
 		label: "BuildPro Mobile",
-		gradient: "bg-linear-to-br from-[#56a2e8] to-[#93bfe9]",
+		gradient: "bg-gradient-to-br from-cyan-600 to-blue-600",
 	},
 	{
 		label: "Argao Branding",
-		gradient: "bg-linear-to-br from-[#93bfe9] to-[#56a2e8]",
+		gradient: "bg-gradient-to-br from-purple-600 to-pink-600",
 	},
 	{
 		label: "Code Snippet",
-		gradient: "bg-linear-to-br from-[#56a2e8] to-[#103a62]",
+		gradient: "bg-gradient-to-br from-green-600 to-teal-600",
 	},
 	{
 		label: "Git Workflow",
-		gradient: "bg-linear-to-br from-[#103a62] to-[#93bfe9]",
+		gradient: "bg-gradient-to-br from-orange-600 to-red-600",
 	},
 	{
 		label: "UI Components",
-		gradient: "bg-linear-to-br from-[#93bfe9] to-[#103a62]",
-	},
-	{
-		label: "Design System",
-		gradient: "bg-linear-to-br from-[#56a2e8] to-[#93bfe9]",
-	},
-	{
-		label: "Astro Project",
-		gradient: "bg-linear-to-br from-[#103a62] to-[#56a2e8]",
+		gradient: "bg-gradient-to-br from-indigo-600 to-purple-600",
 	},
 ];
 
-// Social Links
-const socialLinks = [
-	{ name: "LinkedIn", url: "https://linkedin.com" },
-	{ name: "GitHub", url: "https://github.com" },
-	{ name: "Twitter", url: "https://twitter.com" },
-];
-
-// Speaking
-const speaking = {
-	description:
-		"Available for speaking at events about software development, cloud architecture, and emerging technologies.",
-	email: profile.email,
+// Main Content Data
+const content = {
+	greeting: "Hi there, I'm Christy!",
+	intro: `I am a <strong>Web Developer</strong> and <strong>UI/UX Designer</strong> dedicated to building high-performance, conversion-driven digital products. I specialize in bridging the gap between aesthetic design systems and functional code to create web applications that deliver measurable results.`,
+	mission: `I believe that design isn't just how it looks; it's how it converts. My approach centers on a "sales-first" philosophy, ensuring that every layout, presentation, and interaction is optimized for user engagement and business growth.`,
+	techToolkit: [
+		{
+			name: "Category",
+			items: [{ name: "Tools & Technologies", color: "bg-gray-700" }],
+		},
+		{
+			name: "Frontend",
+			items: [
+				{ name: "⚛️ React", color: "bg-blue-600" },
+				{ name: "🚀 JavaScript", color: "bg-yellow-500" },
+				{ name: "🎨 Astro", color: "bg-orange-500" },
+				{ name: "🎨 HTML", color: "bg-red-500" },
+			],
+		},
+		{
+			name: "Styling",
+			items: [
+				{ name: "🎨 Tailwind CSS", color: "bg-cyan-500" },
+				{ name: "Design Systems", color: "bg-purple-600" },
+				{ name: "Responsive UI", color: "bg-pink-500" },
+			],
+		},
+		{
+			name: "Design",
+			items: [
+				{ name: "🎨 UI Design", color: "bg-indigo-600" },
+				{ name: "Prototyping", color: "bg-purple-500" },
+				{ name: "Wireframing", color: "bg-pink-600" },
+				{ name: "UX Research", color: "bg-blue-500" },
+			],
+		},
+		{
+			name: "Strategy",
+			items: [
+				{ name: "Sales-First UX", color: "bg-green-600" },
+				{ name: "Conversion Optimization", color: "bg-emerald-600" },
+				{ name: "Performance SEO", color: "bg-teal-600" },
+			],
+		},
+		{
+			name: "Workflow",
+			items: [
+				{ name: "🔥 Git", color: "bg-orange-600" },
+				{ name: "📦 Vite", color: "bg-purple-600" },
+				{ name: "Vim", color: "bg-green-700" },
+				{ name: "npm", color: "bg-red-600" },
+			],
+		},
+	],
+	whatIBring: [
+		`<strong>Web-First Driven Development:</strong> Leveraging Astro and Tailwind CSS to build lightning-fast landing pages with optimized Core Web Vitals.`,
+		`<strong>Scalable Architecture:</strong> Utilizing React and TypeScript for robust, data-driven applications.`,
+		`<strong>Conversion Strategy:</strong> Integrating strategic insights, prototypes, and sales funnels directly into the user prompt.`,
+		`<strong>Design Consistency:</strong> Building and maintaining design systems in Figma to ensure brand integrity across all platforms.`,
+	],
+	beyondCode: {
+		intro: "When I'm not in a code editor or Figma, I'm usually:",
+		items: [
+			"Exploring personal finance and investing to better understand market psychology and conversion tactics.",
+			"Staying up-to-date with the latest UI/UX psychology and conversion tactics.",
+			"Refining my workflow to move from prototype to production with zero friction.",
+		],
+	},
 };
 ---
 
@@ -179,38 +186,21 @@ const speaking = {
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
-	<body class="bg-[#f5f8fb] text-[#05080b] font-sans antialiased">
-		<div class="min-h-screen max-w-4xl mx-auto px-6 py-12 md:py-16">
-			<ProfileHeader {...profile} />
-
-			<main class="space-y-16">
-				<About bio={bio} />
-
-				<section class="grid lg:grid-cols-[1.3fr_1fr] gap-12">
-					<TechStack categories={techStack} />
-					<Experience experiences={experiences} />
-				</section>
-
-				<Projects projects={projects} />
-
-				<Certifications certifications={certifications} />
-
-				<Gallery items={gallery} />
-
-				<SocialLinks links={socialLinks} />
-
-				<Speaking {...speaking} />
-			</main>
-
-			<Footer
-				name={profile.name}
-				email={profile.email}
-				socialLinks={socialLinks}
-			/>
+	<body class="bg-[#0d1117] text-[#c9d1d9] font-sans antialiased">
+		<div class="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<div class="grid lg:grid-cols-[320px_1fr] gap-6">
+				<ProfileSidebar {...profile} />
+				<div class="space-y-6">
+					<MainContent {...content} />
+					<ProjectsSection projects={projects} />
+					<ExperienceSection experiences={experiences} />
+					<GallerySection items={gallery} />
+				</div>
+			</div>
 		</div>
 
 		<style>

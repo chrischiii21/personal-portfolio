@@ -1,0 +1,43 @@
+---
+const { experiences } = Astro.props;
+---
+
+<div class="bg-[#0d1117] border border-[#30363d] rounded-lg p-6">
+    <h3
+        class="text-lg font-semibold text-[#e6edf3] mb-4 flex items-center gap-2"
+    >
+        <span>💼</span> Experience & Education
+    </h3>
+    <div class="relative">
+        <div class="absolute left-[7px] top-2 bottom-2 w-0.5 bg-[#30363d]">
+        </div>
+        <div class="space-y-6">
+            {
+                experiences.map(
+                    (exp: {
+                        title: string;
+                        company: string;
+                        period: string;
+                        description?: string;
+                    }) => (
+                        <div class="relative pl-6">
+                            <div class="absolute left-0 top-1.5 w-4 h-4 bg-[#58a6ff] rounded-full border-2 border-[#0d1117]" />
+                            <h4 class="text-[#e6edf3] font-semibold">
+                                {exp.title}
+                            </h4>
+                            <p class="text-[#7d8590] text-sm">{exp.company}</p>
+                            <p class="text-[#7d8590] text-xs mt-1">
+                                {exp.period}
+                            </p>
+                            {exp.description && (
+                                <p class="text-[#c9d1d9] text-sm mt-2">
+                                    {exp.description}
+                                </p>
+                            )}
+                        </div>
+                    ),
+                )
+            }
+        </div>
+    </div>
+</div>
