@@ -7,13 +7,17 @@ const { name, username, pronouns, location, followers, following, email } =
     <!-- Profile Image -->
     <div class="relative mb-4">
         <div
-            class="w-full aspect-square rounded-full border-4 border-[#1c2128] bg-gradient-to-br from-[#103a62] to-[#56a2e8] flex items-center justify-center text-8xl overflow-hidden"
+            class="w-full aspect-square rounded-full border-4 border-[#1c2128] overflow-hidden bg-[#0d1117]"
         >
-            👩‍💻
+            <img
+                src="/IMG_0063.jpg"
+                alt={name}
+                class="w-full h-full object-cover"
+            />
         </div>
         <button
             class="absolute bottom-2 right-2 w-10 h-10 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] rounded-full flex items-center justify-center transition-colors"
-            aria-label="Edit profile"
+            aria-label="Change profile photo"
         >
             <span class="text-lg">😊</span>
         </button>
