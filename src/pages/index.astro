@@ -1,17 +1,628 @@
 ---
-
+import "../styles/global.css";
 ---
 
-<html lang="en">
+<!doctype html>
+<html lang="en" class="scroll-smooth">
 	<head>
-		<meta charset="utf-8" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Alex Morgan - Software Engineer</title>
+		<meta
+			name="description"
+			content="Full-stack software engineer specializing in React, Node.js, and cloud architecture."
+		/>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="bg-[#f5f8fb] text-[#05080b] font-sans antialiased">
+		<div class="min-h-screen max-w-4xl mx-auto px-6 py-12 md:py-16">
+			<!-- Profile Header -->
+			<header class="text-center mb-12">
+				<div
+					class="w-32 h-32 mx-auto mb-6 rounded-full bg-linear-to-br from-[#103a62] to-[#56a2e8] flex items-center justify-center text-6xl shadow-lg"
+				>
+					👨‍💻
+				</div>
+				<h1 class="text-4xl md:text-5xl font-bold text-[#05080b] mb-2">
+					Alex Morgan
+				</h1>
+				<div class="flex items-center justify-center gap-2 mb-3">
+					<span class="w-2 h-2 bg-[#56a2e8] rounded-full"></span>
+					<p class="text-[#103a62]/70">San Francisco, CA</p>
+				</div>
+				<p class="text-xl text-[#103a62] font-medium mb-6">
+					Software Engineer \ Full Stack Developer \ Tech Mentor
+				</p>
+
+				<!-- CTA Buttons -->
+				<div
+					class="flex flex-wrap items-center justify-center gap-3 mb-6"
+				>
+					<a
+						href="mailto:alex@example.com"
+						class="bg-[#103a62] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer shadow-md"
+					>
+						Send Email
+					</a>
+					<a
+						href="https://calendly.com"
+						target="_blank"
+						class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-2.5 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
+					>
+						Schedule a Call
+					</a>
+					<a
+						href="/resume.pdf"
+						download
+						class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-2.5 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
+					>
+						Download Resume
+					</a>
+				</div>
+
+				<!-- Achievement Badge -->
+				<div
+					class="inline-block bg-[#56a2e8]/10 border border-[#56a2e8]/30 rounded-lg px-4 py-2"
+				>
+					<p class="text-sm text-[#103a62] font-medium">
+						🏆 AWS Certified Solutions Architect 2024
+					</p>
+				</div>
+			</header>
+
+			<!-- Main Content -->
+			<main class="space-y-16">
+				<!-- About -->
+				<section>
+					<h2 class="text-3xl font-bold text-[#05080b] mb-6">
+						About
+					</h2>
+					<div
+						class="space-y-4 text-[#103a62]/90 leading-relaxed text-lg"
+					>
+						<p>
+							I'm a full-stack software engineer specializing in
+							developing solutions with <strong
+								class="text-[#05080b]">React</strong
+							>, <strong class="text-[#05080b]">Node.js</strong>,
+							and <strong class="text-[#05080b]"
+								>TypeScript</strong
+							>. I work on projects including building modern web
+							applications, cloud infrastructure, API development,
+							and creating scalable systems.
+						</p>
+						<p>
+							I've helped startups and enterprises grow and
+							streamline their processes through software
+							solutions. I've also contributed to open-source
+							projects and mentored over 50 developers in the
+							community.
+						</p>
+						<p>
+							Lately, I've been diving deeper into the world of <strong
+								class="text-[#05080b]"
+								>cloud architecture</strong
+							> and <strong class="text-[#05080b]">DevOps</strong
+							>, focusing on building resilient, high-performance
+							systems. My work now includes developing
+							microservices, implementing CI/CD pipelines, and
+							optimizing infrastructure for scale.
+						</p>
+					</div>
+				</section>
+
+				<!-- Tech Stack & Experience - 2 Column Layout -->
+				<section class="grid lg:grid-cols-[1.3fr_1fr] gap-12">
+					<!-- Tech Stack Column -->
+					<div>
+						<div class="flex items-center justify-between mb-6">
+							<h2 class="text-3xl font-bold text-[#05080b]">
+								Tech Stack
+							</h2>
+							<a
+								href="#"
+								class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
+								>View All ?</a
+							>
+						</div>
+						<div class="space-y-6">
+							<div>
+								<h3
+									class="text-sm font-semibold text-[#56a2e8] uppercase tracking-wide mb-3"
+								>
+									Frontend
+								</h3><div class="flex flex-wrap gap-2">
+									<span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>JavaScript</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>TypeScript</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>React</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>Next.js</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>Vue.js</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>Tailwind CSS</span
+									>
+								</div>
+							</div>
+							<div>
+								<h3
+									class="text-sm font-semibold text-[#56a2e8] uppercase tracking-wide mb-3"
+								>
+									Backend
+								</h3><div class="flex flex-wrap gap-2">
+									<span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>Node.js</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>Python</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>PostgreSQL</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>MongoDB</span
+									>
+								</div>
+							</div>
+							<div>
+								<h3
+									class="text-sm font-semibold text-[#56a2e8] uppercase tracking-wide mb-3"
+								>
+									DevOps & Cloud
+								</h3><div class="flex flex-wrap gap-2">
+									<span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>AWS</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>Docker</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>Kubernetes</span
+									><span
+										class="bg-white border border-[#93bfe9]/50 px-4 py-2 rounded-lg text-sm text-[#103a62] font-medium"
+										>GitHub Actions</span
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Experience Column -->
+					<div>
+						<h2 class="text-3xl font-bold text-[#05080b] mb-6">
+							Experience
+						</h2>
+						<div class="relative">
+							<div
+								class="absolute left-[7px] top-2 bottom-2 w-0.5 bg-[#93bfe9]/30"
+							>
+							</div>
+							<div class="space-y-8">
+								<div class="relative pl-8">
+									<div
+										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
+									>
+									</div><h3
+										class="text-xl font-bold text-[#05080b]"
+									>
+										Senior Full Stack Developer
+									</h3><p
+										class="text-[#103a62] font-medium mb-1"
+									>
+										Tech Innovations Inc.
+									</p><p class="text-sm text-[#103a62]/70">
+										2023 - Present
+									</p>
+								</div>
+								<div class="relative pl-8">
+									<div
+										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
+									>
+									</div><h3
+										class="text-xl font-bold text-[#05080b]"
+									>
+										Full Stack Developer
+									</h3><p
+										class="text-[#103a62] font-medium mb-1"
+									>
+										Digital Solutions Co.
+									</p><p class="text-sm text-[#103a62]/70">
+										2021 - 2023
+									</p>
+								</div>
+								<div class="relative pl-8">
+									<div
+										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
+									>
+									</div><h3
+										class="text-xl font-bold text-[#05080b]"
+									>
+										Frontend Developer
+									</h3><p
+										class="text-[#103a62] font-medium mb-1"
+									>
+										Creative Agency
+									</p><p class="text-sm text-[#103a62]/70">
+										2019 - 2021
+									</p>
+								</div>
+								<div class="relative pl-8">
+									<div
+										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
+									>
+									</div><h3
+										class="text-xl font-bold text-[#05080b]"
+									>
+										B.S. Computer Science
+									</h3><p
+										class="text-[#103a62] font-medium mb-1"
+									>
+										University of California
+									</p><p class="text-sm text-[#103a62]/70">
+										2015 - 2019
+									</p>
+								</div>
+								<div class="relative pl-8">
+									<div
+										class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]"
+									>
+									</div><h3
+										class="text-xl font-bold text-[#05080b]"
+									>
+										Hello World! 👋
+									</h3><p
+										class="text-[#103a62] font-medium mb-1"
+									>
+										Wrote my first line of code
+									</p><p class="text-sm text-[#103a62]/70">
+										2011
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Recent Projects -->
+				<section>
+					<div class="flex items-center justify-between mb-6">
+						<h2 class="text-3xl font-bold text-[#05080b]">
+							Recent Projects
+						</h2>
+						<a
+							href="#"
+							class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
+							>View All →</a
+						>
+					</div>
+
+					<div class="grid md:grid-cols-2 gap-4">
+						<a
+							href="#"
+							class="block bg-white border border-[#93bfe9]/50 rounded-xl p-6 hover:shadow-lg hover:border-[#56a2e8] transition-all group cursor-pointer"
+						>
+							<h3
+								class="text-lg font-bold text-[#05080b] mb-2 group-hover:text-[#56a2e8] transition-colors"
+							>
+								E-Commerce Platform
+							</h3>
+							<p class="text-sm text-[#103a62]/70 mb-3">
+								Modern shopping experience with real-time
+								inventory
+							</p>
+							<p class="text-xs text-[#56a2e8] font-medium">
+								ecommerce.dev
+							</p>
+						</a>
+
+						<a
+							href="#"
+							class="block bg-white border border-[#93bfe9]/50 rounded-xl p-6 hover:shadow-lg hover:border-[#56a2e8] transition-all group cursor-pointer"
+						>
+							<h3
+								class="text-lg font-bold text-[#05080b] mb-2 group-hover:text-[#56a2e8] transition-colors"
+							>
+								Analytics Dashboard
+							</h3>
+							<p class="text-sm text-[#103a62]/70 mb-3">
+								Real-time metrics and insights platform
+							</p>
+							<p class="text-xs text-[#56a2e8] font-medium">
+								analytics.io
+							</p>
+						</a>
+
+						<a
+							href="#"
+							class="block bg-white border border-[#93bfe9]/50 rounded-xl p-6 hover:shadow-lg hover:border-[#56a2e8] transition-all group cursor-pointer"
+						>
+							<h3
+								class="text-lg font-bold text-[#05080b] mb-2 group-hover:text-[#56a2e8] transition-colors"
+							>
+								Mobile Banking App
+							</h3>
+							<p class="text-sm text-[#103a62]/70 mb-3">
+								Secure financial management with biometric auth
+							</p>
+							<p class="text-xs text-[#56a2e8] font-medium">
+								bankapp.com
+							</p>
+						</a>
+
+						<a
+							href="#"
+							class="block bg-white border border-[#93bfe9]/50 rounded-xl p-6 hover:shadow-lg hover:border-[#56a2e8] transition-all group cursor-pointer"
+						>
+							<h3
+								class="text-lg font-bold text-[#05080b] mb-2 group-hover:text-[#56a2e8] transition-colors"
+							>
+								AI Content Generator
+							</h3>
+							<p class="text-sm text-[#103a62]/70 mb-3">
+								GPT-powered creative writing assistant
+							</p>
+							<p class="text-xs text-[#56a2e8] font-medium">
+								aiwriter.app
+							</p>
+						</a>
+					</div>
+				</section>
+
+				<!-- Recent Certifications -->
+				<section>
+					<div class="flex items-center justify-between mb-6">
+						<h2 class="text-3xl font-bold text-[#05080b]">
+							Recent Certifications
+						</h2>
+						<a
+							href="#"
+							class="text-[#56a2e8] hover:text-[#103a62] font-medium text-sm transition-colors"
+							>View All →</a
+						>
+					</div>
+
+					<div class="grid md:grid-cols-2 gap-4">
+						<div
+							class="bg-white border border-[#93bfe9]/50 rounded-xl p-5"
+						>
+							<h3 class="text-base font-bold text-[#05080b] mb-1">
+								AWS Certified Solutions Architect
+							</h3>
+							<p class="text-sm text-[#103a62]/70">
+								Amazon Web Services
+							</p>
+						</div>
+
+						<div
+							class="bg-white border border-[#93bfe9]/50 rounded-xl p-5"
+						>
+							<h3 class="text-base font-bold text-[#05080b] mb-1">
+								Google Cloud Professional
+							</h3>
+							<p class="text-sm text-[#103a62]/70">
+								Google Cloud
+							</p>
+						</div>
+
+						<div
+							class="bg-white border border-[#93bfe9]/50 rounded-xl p-5"
+						>
+							<h3 class="text-base font-bold text-[#05080b] mb-1">
+								MongoDB Certified Developer
+							</h3>
+							<p class="text-sm text-[#103a62]/70">
+								MongoDB University
+							</p>
+						</div>
+
+						<div
+							class="bg-white border border-[#93bfe9]/50 rounded-xl p-5"
+						>
+							<h3 class="text-base font-bold text-[#05080b] mb-1">
+								Kubernetes Administrator
+							</h3>
+							<p class="text-sm text-[#103a62]/70">
+								Cloud Native Computing Foundation
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- Gallery -->
+				<section>
+					<h2 class="text-3xl font-bold text-[#05080b] mb-6">
+						Gallery
+					</h2>
+					<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+						<div
+							class="aspect-square bg-linear-to-br from-[#103a62] to-[#56a2e8] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer"
+						>
+							<div
+								class="w-full h-full flex items-center justify-center text-white text-4xl"
+							>
+								🎤
+							</div>
+						</div>
+
+						<div
+							class="aspect-square bg-linear-to-br from-[#56a2e8] to-[#93bfe9] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer"
+						>
+							<div
+								class="w-full h-full flex items-center justify-center text-white text-4xl"
+							>
+								💻
+							</div>
+						</div>
+
+						<div
+							class="aspect-square bg-linear-to-br from-[#93bfe9] to-[#56a2e8] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer"
+						>
+							<div
+								class="w-full h-full flex items-center justify-center text-white text-4xl"
+							>
+								🏆
+							</div>
+						</div>
+
+						<div
+							class="aspect-square bg-linear-to-br from-[#56a2e8] to-[#103a62] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer"
+						>
+							<div
+								class="w-full h-full flex items-center justify-center text-white text-4xl"
+							>
+								📱
+							</div>
+						</div>
+
+						<div
+							class="aspect-square bg-linear-to-br from-[#103a62] to-[#93bfe9] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer"
+						>
+							<div
+								class="w-full h-full flex items-center justify-center text-white text-4xl"
+							>
+								🎯
+							</div>
+						</div>
+
+						<div
+							class="aspect-square bg-linear-to-br from-[#93bfe9] to-[#103a62] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer"
+						>
+							<div
+								class="w-full h-full flex items-center justify-center text-white text-4xl"
+							>
+								🚀
+							</div>
+						</div>
+
+						<div
+							class="aspect-square bg-linear-to-br from-[#56a2e8] to-[#93bfe9] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer"
+						>
+							<div
+								class="w-full h-full flex items-center justify-center text-white text-4xl"
+							>
+								🎨
+							</div>
+						</div>
+
+						<div
+							class="aspect-square bg-linear-to-br from-[#103a62] to-[#56a2e8] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform cursor-pointer"
+						>
+							<div
+								class="w-full h-full flex items-center justify-center text-white text-4xl"
+							>
+								📊
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Social Links -->
+				<section>
+					<h2 class="text-3xl font-bold text-[#05080b] mb-6">
+						Social Links
+					</h2>
+					<div class="flex flex-wrap gap-3">
+						<a
+							href="https://linkedin.com"
+							target="_blank"
+							class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
+						>
+							LinkedIn
+						</a>
+						<a
+							href="https://github.com"
+							target="_blank"
+							class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
+						>
+							GitHub
+						</a>
+						<a
+							href="https://twitter.com"
+							target="_blank"
+							class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
+						>
+							Twitter
+						</a>
+					</div>
+				</section>
+
+				<!-- Contact -->
+				<section>
+					<h2 class="text-3xl font-bold text-[#05080b] mb-6">
+						Speaking
+					</h2>
+					<p class="text-[#103a62]/90 leading-relaxed text-lg mb-6">
+						Available for speaking at events about software
+						development, cloud architecture, and emerging
+						technologies.
+					</p>
+					<div class="flex flex-wrap gap-3">
+						<a
+							href="mailto:alex@example.com"
+							class="bg-[#103a62] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#103a62]/90 transition-colors cursor-pointer"
+						>
+							Get in touch
+						</a>
+						<a
+							href="https://calendly.com"
+							target="_blank"
+							class="bg-white border-2 border-[#93bfe9] text-[#103a62] px-6 py-3 rounded-lg font-medium hover:bg-[#93bfe9]/10 transition-colors cursor-pointer"
+						>
+							Schedule a Call
+						</a>
+					</div>
+				</section>
+			</main>
+
+			<!-- Footer -->
+			<footer class="mt-20 pt-8 border-t border-[#93bfe9]/30 text-center">
+				<p class="text-sm text-[#103a62]/70 mb-4">
+					© 2024 Alex Morgan. All rights reserved.
+				</p>
+				<div
+					class="flex items-center justify-center gap-4 text-sm text-[#103a62]/70"
+				>
+					<a
+						href="mailto:alex@example.com"
+						class="hover:text-[#56a2e8] transition-colors">Email</a
+					>
+					<span>•</span>
+					<a
+						href="https://linkedin.com"
+						target="_blank"
+						class="hover:text-[#56a2e8] transition-colors"
+						>LinkedIn</a
+					>
+					<span>•</span>
+					<a
+						href="https://github.com"
+						target="_blank"
+						class="hover:text-[#56a2e8] transition-colors">GitHub</a
+					>
+				</div>
+			</footer>
+		</div>
+
+		<style>
+			* {
+				font-family: "Inter", sans-serif;
+			}
+		</style>
 	</body>
 </html>
