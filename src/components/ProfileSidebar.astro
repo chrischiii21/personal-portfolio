@@ -1,0 +1,137 @@
+---
+const { name, username, pronouns, location, followers, following, email } =
+    Astro.props;
+---
+
+<aside class="lg:sticky lg:top-8 lg:self-start">
+    <!-- Profile Image -->
+    <div class="relative mb-4">
+        <div
+            class="w-full aspect-square rounded-full border-4 border-[#1c2128] overflow-hidden bg-[#0d1117]"
+        >
+            <img
+                src="/IMG_0063.jpg"
+                alt={name}
+                class="w-full h-full object-cover"
+            />
+        </div>
+        <button
+            class="absolute bottom-2 right-2 w-10 h-10 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] rounded-full flex items-center justify-center transition-colors"
+            aria-label="Change profile photo"
+        >
+            <span class="text-lg">😊</span>
+        </button>
+    </div>
+
+    <!-- Name & Username -->
+    <div class="mb-4">
+        <h1 class="text-2xl font-semibold text-[#e6edf3] mb-1">{name}</h1>
+        <p class="text-xl text-[#7d8590] font-light">{username}</p>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="space-y-2 mb-4">
+        <a
+            href="/resume.pdf"
+            download
+            class="w-full bg-[#238636] hover:bg-[#2ea043] border border-[#238636] text-white text-sm font-medium py-1.5 px-4 rounded-md transition-colors block text-center"
+        >
+            📄 Download Resume
+        </a>
+        <a
+            href={`mailto:${email}`}
+            class="w-full bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-[#e6edf3] text-sm font-medium py-1.5 px-4 rounded-md transition-colors block text-center"
+        >
+            ✉️ Send Email
+        </a>
+        <a
+            href="https://calendly.com"
+            target="_blank"
+            class="w-full bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-[#e6edf3] text-sm font-medium py-1.5 px-4 rounded-md transition-colors block text-center"
+        >
+            📅 Schedule a Call
+        </a>
+    </div>
+
+    <!-- Followers -->
+    <div class="flex items-center gap-4 text-sm text-[#e6edf3] mb-4">
+        <a href="#" class="hover:text-[#58a6ff] transition-colors">
+            <span class="font-semibold">{followers}</span>
+            <span class="text-[#7d8590]"> followers</span>
+        </a>
+        <span class="text-[#7d8590]">·</span>
+        <a href="#" class="hover:text-[#58a6ff] transition-colors">
+            <span class="font-semibold">{following}</span>
+            <span class="text-[#7d8590]"> following</span>
+        </a>
+    </div>
+
+    <!-- Pronouns Badge -->
+    <div class="mb-4">
+        <span
+            class="inline-block bg-[#21262d] border border-[#30363d] text-[#7d8590] text-xs px-2 py-0.5 rounded-full"
+        >
+            {pronouns}
+        </span>
+    </div>
+
+    <!-- Location & Email -->
+    <div class="space-y-2 text-sm text-[#e6edf3]">
+        <div class="flex items-center gap-2">
+            <svg
+                class="w-4 h-4 text-[#7d8590]"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    d="M11.536 3.464a5 5 0 010 7.072L8 14.07l-3.536-3.535a5 5 0 117.072-7.072v.001zm1.06 8.132a6.5 6.5 0 10-9.192 0l3.535 3.536a1.5 1.5 0 002.122 0l3.535-3.536zM8 9a2 2 0 100-4 2 2 0 000 4z"
+                ></path>
+            </svg>
+            <span>{location}</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <svg
+                class="w-4 h-4 text-[#7d8590]"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-8.5C0 2.784.784 2 1.75 2zM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.809L8.38 9.397a.75.75 0 01-.76 0L1.5 5.809v6.442zm13-8.181v-.32a.25.25 0 00-.25-.25H1.75a.25.25 0 00-.25.25v.32L8 7.88l6.5-3.81z"
+                ></path>
+            </svg>
+            <a
+                href={`mailto:${email}`}
+                class="hover:text-[#58a6ff] transition-colors"
+            >
+                {email}
+            </a>
+        </div>
+    </div>
+
+    <!-- Achievements -->
+    <div class="mt-6 pt-6 border-t border-[#21262d]">
+        <h3 class="text-base font-semibold text-[#e6edf3] mb-3">
+            Achievements
+        </h3>
+        <div class="flex gap-2">
+            <div
+                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-2xl"
+                title="Arctic Code Vault Contributor"
+            >
+                ❄️
+            </div>
+            <div
+                class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center text-2xl"
+                title="Pull Shark"
+            >
+                🦈
+            </div>
+            <div
+                class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-2xl"
+                title="YOLO"
+            >
+                🎯
+            </div>
+        </div>
+    </div>
+</aside>

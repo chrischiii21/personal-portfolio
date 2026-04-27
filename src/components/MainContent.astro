@@ -1,0 +1,99 @@
+---
+const { greeting, intro, mission, techToolkit, whatIBring, beyondCode } =
+    Astro.props;
+---
+
+<div class="space-y-6">
+    <!-- Greeting -->
+    <div class="bg-[#0d1117] border border-[#30363d] rounded-lg p-6">
+        <h2 class="text-2xl font-semibold text-[#e6edf3] mb-4">
+            {greeting} 👋
+        </h2>
+        <p class="text-[#c9d1d9] leading-relaxed" set:html={intro} />
+    </div>
+
+    <!-- The Mission -->
+    <div class="bg-[#0d1117] border border-[#30363d] rounded-lg p-6">
+        <h3
+            class="text-lg font-semibold text-[#e6edf3] mb-3 flex items-center gap-2"
+        >
+            <span>🎯</span> The Mission
+        </h3>
+        <p class="text-[#c9d1d9] leading-relaxed">{mission}</p>
+    </div>
+
+    <!-- Technical Toolkit -->
+    <div class="bg-[#0d1117] border border-[#30363d] rounded-lg p-6">
+        <h3
+            class="text-lg font-semibold text-[#e6edf3] mb-4 flex items-center gap-2"
+        >
+            <span>⚡</span> Technical Toolkit
+        </h3>
+        <div class="space-y-4">
+            {
+                techToolkit.map(
+                    (category: {
+                        name: string;
+                        items: { name: string; color: string }[];
+                    }) => (
+                        <div>
+                            <p class="text-sm font-semibold text-[#7d8590] uppercase tracking-wide mb-2">
+                                {category.name}
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                {category.items.map(
+                                    (item: { name: string; color: string }) => (
+                                        <span
+                                            class={`inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium text-white ${item.color}`}
+                                        >
+                                            {item.name}
+                                        </span>
+                                    ),
+                                )}
+                            </div>
+                        </div>
+                    ),
+                )
+            }
+        </div>
+    </div>
+
+    <!-- What I Bring to the Table -->
+    <div class="bg-[#0d1117] border border-[#30363d] rounded-lg p-6">
+        <h3
+            class="text-lg font-semibold text-[#e6edf3] mb-4 flex items-center gap-2"
+        >
+            <span>💡</span> What I Bring to the Table
+        </h3>
+        <ul class="space-y-2 text-[#c9d1d9]">
+            {
+                whatIBring.map((item: string) => (
+                    <li class="flex items-start gap-2">
+                        <span class="text-[#58a6ff] mt-1">▸</span>
+                        <span set:html={item} />
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+
+    <!-- Beyond the Code -->
+    <div class="bg-[#0d1117] border border-[#30363d] rounded-lg p-6">
+        <h3
+            class="text-lg font-semibold text-[#e6edf3] mb-4 flex items-center gap-2"
+        >
+            <span>✨</span> Beyond the Code
+        </h3>
+        <p class="text-[#c9d1d9] leading-relaxed mb-3">{beyondCode.intro}</p>
+        <ul class="space-y-2 text-[#c9d1d9]">
+            {
+                beyondCode.items.map((item: string) => (
+                    <li class="flex items-start gap-2">
+                        <span class="text-[#58a6ff] mt-1">▸</span>
+                        <span>{item}</span>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</div>
