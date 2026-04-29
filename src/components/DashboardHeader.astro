@@ -1,0 +1,83 @@
+---
+const { name, username, level, stats } = Astro.props;
+---
+
+<header class="mb-8">
+    <div
+        class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6"
+    >
+        <!-- Profile Section -->
+        <div class="flex items-center gap-6">
+            <div class="relative">
+                <div
+                    class="w-32 h-32 rounded-full border-4 border-[#0078d4] overflow-hidden bg-[#1a1a1a] p-1"
+                >
+                    <div class="w-full h-full rounded-full overflow-hidden">
+                        <img
+                            src="/IMG_0063.jpg"
+                            alt={name}
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h1 class="text-3xl font-semibold text-white mb-2">{name}</h1>
+                <div class="flex items-center gap-3 mb-3">
+                    <span
+                        class="bg-[#0078d4] text-white text-xs font-semibold px-3 py-1 rounded-full"
+                    >
+                        {level}
+                    </span>
+                    <a href="#" class="text-[#0078d4] text-sm hover:underline"
+                        >Learn more ›</a
+                    >
+                </div>
+                <div class="flex items-center gap-2 text-sm text-[#8a8a8a]">
+                    <span
+                        >Progress towards: <strong class="text-white"
+                            >Senior</strong
+                        ></span
+                    >
+                    <span>•</span>
+                    <span
+                        >Points to go: <strong class="text-white"
+                            >{stats.pointsToGo}</strong
+                        ></span
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="flex gap-4">
+            <div
+                class="bg-[#1a1a1a] border border-[#2d2d2d] rounded-lg p-4 min-w-[140px]"
+            >
+                <div
+                    class="flex items-center gap-2 text-[#8a8a8a] text-xs mb-2"
+                >
+                    <span>🎯</span>
+                    <span>Available points</span>
+                </div>
+                <div class="text-2xl font-semibold text-[#ff9500]">
+                    {stats.availablePoints}
+                </div>
+            </div>
+            <div
+                class="bg-[#1a1a1a] border border-[#2d2d2d] rounded-lg p-4 min-w-[140px]"
+            >
+                <div
+                    class="flex items-center gap-2 text-[#8a8a8a] text-xs mb-2"
+                >
+                    <span>🏆</span>
+                    <span>Ready to claim</span>
+                </div>
+                <div class="text-2xl font-semibold text-[#ff9500]">
+                    {stats.readyToClaim}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
