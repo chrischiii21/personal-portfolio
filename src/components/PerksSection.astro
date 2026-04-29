@@ -1,0 +1,96 @@
+---
+const { perks } = Astro.props;
+---
+
+<section class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold text-white flex items-center gap-2">
+            Your perks
+            <button class="text-[#8a8a8a] hover:text-white">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                    ></path>
+                    <path
+                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                    ></path>
+                </svg>
+            </button>
+        </h2>
+        <button
+            class="text-[#0078d4] text-sm hover:underline flex items-center gap-1"
+        >
+            <span>Coupons (0)</span>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    fill-rule="evenodd"
+                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                ></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="grid lg:grid-cols-[2fr_1fr] gap-4">
+        <!-- Featured Perk -->
+        <div
+            class="bg-[#1a1a1a] border border-[#2d2d2d] rounded-lg p-6 relative overflow-hidden"
+        >
+            <div class="relative z-10">
+                <h3 class="text-lg font-semibold text-white mb-2">
+                    {perks.featured.title}
+                </h3>
+                <p class="text-[#8a8a8a] text-sm mb-4">
+                    {perks.featured.description}
+                </p>
+                <button
+                    class="bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white px-4 py-2 rounded text-sm transition-colors"
+                >
+                    View
+                </button>
+            </div>
+            <div
+                class="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 opacity-20"
+            >
+                <div class="text-8xl">🎁</div>
+            </div>
+        </div>
+
+        <!-- Bonus Cards -->
+        <div class="space-y-4">
+            {
+                perks.bonuses.map(
+                    (bonus: {
+                        points: number;
+                        title: string;
+                        description: string;
+                        earned: boolean;
+                    }) => (
+                        <div class="bg-[#1a1a1a] border border-[#2d2d2d] rounded-lg p-4 flex items-center gap-4">
+                            <div class="bg-[#2d2d2d] rounded-lg w-12 h-12 flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl">
+                                    {bonus.earned ? "✅" : "🎯"}
+                                </span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-white font-semibold text-lg">
+                                        {bonus.points}
+                                    </span>
+                                    <span class="text-[#8a8a8a] text-xs">
+                                        Points
+                                    </span>
+                                </div>
+                                <h4 class="text-white text-sm font-medium mb-1">
+                                    {bonus.title}
+                                </h4>
+                                <p class="text-[#8a8a8a] text-xs">
+                                    {bonus.description}
+                                </p>
+                            </div>
+                        </div>
+                    ),
+                )
+            }
+        </div>
+    </div>
+</section>

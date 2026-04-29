@@ -1,0 +1,65 @@
+---
+const { title, icon, items, expandable = false } = Astro.props;
+---
+
+<section class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold text-white flex items-center gap-2">
+            {title}
+            <span class="text-lg">{icon}</span>
+            <button class="text-[#8a8a8a] hover:text-white">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                    ></path>
+                    <path
+                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+                    ></path>
+                </svg>
+            </button>
+        </h2>
+        {
+            expandable && (
+                <button class="text-[#0078d4] text-sm hover:underline">
+                    Earn more
+                </button>
+            )
+        }
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {
+            items.map((item: any) => (
+                <a
+                    href={item.url || "#"}
+                    target={item.url ? "_blank" : "_self"}
+                    class="bg-[#1a1a1a] border border-[#2d2d2d] rounded-lg p-5 hover:border-[#0078d4] transition-colors group"
+                >
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="text-3xl">{item.icon}</div>
+                        {item.badge && (
+                            <span class="bg-[#0078d4] text-white text-xs px-2 py-0.5 rounded">
+                                {item.badge}
+                            </span>
+                        )}
+                    </div>
+                    <h3 class="text-white font-semibold mb-2 group-hover:text-[#0078d4]">
+                        {item.title}
+                    </h3>
+                    <p class="text-[#8a8a8a] text-sm mb-3">
+                        {item.description}
+                    </p>
+                    {item.tech && (
+                        <div class="flex flex-wrap gap-1">
+                            {item.tech.map((t: string) => (
+                                <span class="text-xs text-[#8a8a8a] bg-[#0d0d0d] px-2 py-0.5 rounded">
+                                    {t}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                </a>
+            ))
+        }
+    </div>
+</section>
