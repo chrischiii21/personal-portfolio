@@ -31,62 +31,87 @@ const skills = [
 
 const experience = [
 	{
-		title: "Part-time Web Developer",
-		company: "Freelance",
+		title: "IT Intern (OJT)",
+		company: "N-compass TV",
+		period: "January 2026 – May 2026",
+		points: [
+			"Designed UI/UX for internal tools and platform features",
+			"Developed comprehensive template galleries for various trades",
+			"Created specialized HVAC and Electrician trade templates",
+			"Performed QA testing on channels and showcase modules of the company website",
+		],
+	},
+	{
+		title: "Part Time Data Encoder [Outsourced]",
+		company: "Dedale",
 		period: "2025 – Present",
 		points: [
-			"Built custom web solutions using Astro, React, and Tailwind CSS",
-			"Optimized website performance and conversion rates for clients",
-			"Implemented responsive designs with modern frameworks",
+			"Refined and managed prompt engineering workflows",
+			"Edited and formatted prompt outputs for consistency and quality",
+			"Managed data entry and updates on the official company platform",
 		],
 	},
 	{
-		title: "Finance Committee Member",
-		company: "Graduating Council 2026",
-		period: "2025 – 2026",
+		title: "ESL Teaching (Chinese Students)",
+		company: "Happy Planet Company",
+		period: "2024 – 2025",
 		points: [
-			"Managed budget allocation for graduation events",
-			"Developed automated tracking systems for fee collections",
-		],
-	},
-	{
-		title: "OJT / Teaching Intern",
-		company: "[Institution Name]",
-		period: "2026 – Present",
-		points: [
-			"Assisted in web development curriculum development",
-			"Mentored students in modern web technologies",
+			"Conducted English language lessons for Chinese students",
+			"Developed personalized learning plans to improve student communication skills",
 		],
 	},
 ];
 
 const projects = [
 	{
-		name: "BuildPro (SkillGrid)",
-		description: "Digital marketing platform for trade contractors",
-		tech: ["Astro", "React", "Tailwind", "TypeScript"],
-		url: "buildpro.dev",
+		name: "Internship Tracker",
+		description: "Professional management dashboard for tracking internship hours and administrative progress in real-time.",
+		tech: ["Next.js", "Tailwind CSS", "Clockify API", "NextAuth.js"],
+		url: "internship-tracker-self.vercel.app",
 		highlights: [
-			"Built high-performance landing pages",
-			"Designed conversion-focused UI",
+			"Real-time Clockify API integration",
+			"Automated DTR and sync log generation",
 		],
 	},
 	{
-		name: "Argao Convergence 2025",
-		description: "Youth Leading the Change summit branding",
-		tech: ["UI/UX", "Branding", "Design"],
-		url: "argao2025.com",
+		name: "TicketFlow (Ticket Automation)",
+		description: "Visual automation tool for generating high-quality, numbered tickets and certificates from custom image templates.",
+		tech: ["React", "Tailwind CSS", "Canvas API", "pdf-lib"],
+		url: "ticket-automation-two.vercel.app",
 		highlights: [
-			"Created complete visual identity",
-			"Coordinated 500+ attendees",
+			"Interactive visual hotspot editor",
+			"Bulk high-DPI PDF generation",
 		],
 	},
 	{
-		name: "Graduation Logistics System",
-		description: "Automated tracker for council operations",
-		tech: ["React", "Node.js", "Database"],
-		url: "grad-tracker.app",
-		highlights: ["Reduced manual data entry by 80%"],
+		name: "Prompt Bucket",
+		description: "Community-driven library and creation suite for AI prompts, optimized for high-fidelity image and video generation.",
+		tech: ["Next.js", "Tailwind CSS", "PostgreSQL", "Lucide"],
+		url: "prompt-bucket.vercel.app",
+		highlights: [
+			"Integrated Director's Suite for video blueprints",
+			"Advanced prompt categorization and search",
+		],
+	},
+	{
+		name: "Hyperlinks",
+		description: "Utility for cleaning, formatting, and sanitizing raw text and links for professional documentation platforms.",
+		tech: ["React", "Tailwind CSS", "Clipboard API"],
+		url: "hyper-links.vercel.app",
+		highlights: [
+			"Automated link extraction and sanitization",
+			"Live rich-text formatting preview",
+		],
+	},
+	{
+		name: "Certify",
+		description: "Event management platform featuring automated certificate distribution and real-time claim tracking.",
+		tech: ["Next.js", "Tailwind CSS", "Vercel"],
+		url: "automated-certs.vercel.app",
+		highlights: [
+			"Integrated certificate template editor",
+			"Real-time event claim analytics",
+		],
 	},
 ];
 
@@ -97,11 +122,7 @@ const education = {
 	location: "Cebu City, Philippines",
 };
 
-const certifications = [
-	"Event Organizer - Argao Convergence 2025",
-	"Finance Committee Representative",
-	"Astro Framework Proficiency",
-];
+const certifications = [];
 ---
 
 <!doctype html>
