@@ -1,0 +1,230 @@
+---
+import "../styles/global.css";
+
+const profile = {
+	name: "Christy Montejo",
+	title: "Front-end Web Developer | UI/UX Designer",
+	location: "Cebu City, Philippines",
+	email: "christymontejo2003@gmail.com",
+	github: "github.com/chrischiii21",
+	linkedin: "christymontejo2003@gmail.com",
+	website: "christy-montejo.vercel.app",
+};
+
+const personalStatement = `Results-driven Information Technology student with a strong foundation in Front-end Development and UI/UX Design. Specialized in creating high-performance, conversion-optimized web applications using the Astro and React ecosystems. Proven track record in internship roles focusing on trade-specific digital transformation and AI-driven prompt engineering. Committed to bridging the gap between technical complexity and user-centric design to drive business value.`;
+
+const expertise = [
+	{
+		area: "Technical Development",
+		skills: ["JavaScript (ES6+)", "TypeScript", "React.js", "Astro Framework", "Tailwind CSS", "Python", "HTML5/CSS3", "Node.js", "Bun Runtime"]
+	},
+	{
+		area: "Design & UX",
+		skills: ["UI/UX Architecture", "Figma", "High-Fidelity Prototyping", "Conversion Rate Optimization (CRO)", "Responsive Web Design", "Typography Systems", "Color Theory"]
+	},
+	{
+		area: "Tools & Workflow",
+		skills: ["Git/GitHub", "Vercel", "PostgreSQL", "Canvas API", "RESTful APIs", "Prompt Engineering", "QA Testing", "Agile Methodologies"]
+	}
+];
+
+const workExperience = [
+	{
+		role: "IT Intern (OJT)",
+		organization: "N-compass TV",
+		duration: "Jan 2026 – May 2026",
+		location: "Cebu City, PH",
+		achievements: [
+			"Led the UI/UX redesign of internal platform features, resulting in improved user engagement metrics and internal tool efficiency.",
+			"Developed and maintained a comprehensive template gallery for various industry trades (HVAC, Electrical, Plumbing), standardizing the company's output.",
+			"Collaborated with senior developers to implement high-performance showcase modules using modern CSS and JavaScript frameworks.",
+			"Conducted rigorous QA testing and cross-browser validation to ensure 99.9% uptime for client-facing modules."
+		]
+	},
+	{
+		role: "Data Encoder & Prompt Engineer",
+		organization: "Dedale (Outsourced)",
+		duration: "2025 – Present",
+		location: "Remote",
+		achievements: [
+			"Architected and managed advanced prompt engineering workflows to generate high-fidelity, consistent AI outputs for enterprise use.",
+			"Curated and audited extensive data sets for quality control, ensuring accuracy and brand consistency across AI-generated content.",
+			"Optimized data entry procedures on official company platforms, reducing processing time by 20% through workflow automation and refined prompt techniques."
+		]
+	},
+	{
+		role: "ESL Language Consultant",
+		organization: "Happy Planet Company",
+		duration: "2024 – 2025",
+		location: "Remote",
+		achievements: [
+			"Delivered specialized English language instruction to Chinese students, focusing on business communication and technical vocabulary.",
+			"Designed customized curriculum and learning roadmaps based on individual student performance metrics and communication goals.",
+			"Mentored students in cross-cultural communication strategies, enhancing their ability to operate in international professional environments."
+		]
+	}
+];
+
+const academicHistory = {
+	degree: "Bachelor of Science in Information Technology",
+	institution: "Cebu Technological University - Argao Campus",
+	period: "2022 – 2026",
+	location: "Argao, Cebu",
+	relevantCoursework: ["Web Development", "Database Management", "UI/UX Design Systems", "Software Engineering", "Systems Analysis"]
+};
+
+const languages = [
+	{ language: "English", proficiency: "Professional Working Proficiency" },
+	{ language: "Cebuano/Tagalog", proficiency: "Native/Bilingual Proficiency" }
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CV - {profile.name}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+		<style>
+			body {
+				font-family: 'Inter', sans-serif;
+				line-height: 1.6;
+				color: #1a1a1a;
+				background: #fff;
+			}
+			h1, h2, h3 {
+				font-family: 'Crimson Pro', serif;
+			}
+			.section-title {
+				border-bottom: 1.5px solid #000;
+				padding-bottom: 4px;
+				margin-bottom: 20px;
+				font-size: 1.1rem;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+			}
+			@media print {
+				.no-print { display: none; }
+				body { margin: 0; padding: 0; font-size: 11pt; }
+				.cv-container { box-shadow: none; border: none; margin: 0; padding: 0.5in; max-width: 100%; }
+				@page { margin: 0.75in; }
+			}
+		</style>
+	</head>
+	<body class="bg-gray-100 py-12 px-4">
+		<!-- Controls -->
+		<div class="max-w-[900px] mx-auto mb-8 flex justify-between items-center no-print">
+			<a href="/" class="text-gray-600 hover:text-black font-medium flex items-center gap-2">← Portfolio</a>
+			<button onclick="window.print()" class="bg-black text-white px-8 py-2 rounded font-bold hover:bg-gray-800 transition-all">Download Full CV (PDF)</button>
+		</div>
+
+		<!-- CV Container -->
+		<div class="cv-container max-w-[900px] mx-auto bg-white shadow-xl p-16">
+			<!-- Header -->
+			<header class="text-center mb-16">
+				<h1 class="text-5xl font-bold mb-4 tracking-tight">{profile.name}</h1>
+				<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-gray-600">
+					<span>{profile.location}</span>
+					<span>•</span>
+					<span>{profile.email}</span>
+					<span>•</span>
+					<span>{profile.website}</span>
+					<span>•</span>
+					<span>{profile.linkedin}</span>
+				</div>
+			</header>
+
+			<!-- Personal Statement -->
+			<section class="mb-12">
+				<h2 class="section-title">Personal Statement</h2>
+				<p class="text-gray-800 text-lg leading-relaxed italic">{personalStatement}</p>
+			</section>
+
+			<!-- Areas of Expertise -->
+			<section class="mb-12">
+				<h2 class="section-title">Areas of Expertise</h2>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					{expertise.map(group => (
+						<div>
+							<h3 class="font-bold text-sm mb-3 uppercase text-gray-500">{group.area}</h3>
+							<ul class="space-y-1">
+								{group.skills.map(skill => (
+									<li class="text-sm text-gray-800 font-medium">• {skill}</li>
+								))}
+							</ul>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<!-- Professional Experience -->
+			<section class="mb-12">
+				<h2 class="section-title">Professional Experience</h2>
+				<div class="space-y-10">
+					{workExperience.map(exp => (
+						<div>
+							<div class="flex justify-between items-baseline mb-1">
+								<h3 class="text-xl font-bold">{exp.role}</h3>
+								<span class="text-sm font-bold text-gray-500">{exp.duration}</span>
+							</div>
+							<div class="flex justify-between items-baseline mb-4">
+								<span class="text-lg font-semibold text-gray-700">{exp.organization}</span>
+								<span class="text-xs font-bold text-gray-400 uppercase">{exp.location}</span>
+							</div>
+							<ul class="list-disc list-outside ml-5 space-y-2">
+								{exp.achievements.map(task => (
+									<li class="text-gray-800 text-sm">{task}</li>
+								))}
+							</ul>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<!-- Education -->
+			<section class="mb-12">
+				<h2 class="section-title">Academic History</h2>
+				<div class="flex justify-between items-baseline mb-4">
+					<div>
+						<h3 class="text-xl font-bold">{academicHistory.degree}</h3>
+						<p class="text-gray-700 font-semibold">{academicHistory.institution}</p>
+					</div>
+					<span class="text-sm font-bold text-gray-500">{academicHistory.period}</span>
+				</div>
+				<div class="bg-gray-50 p-4 rounded border border-gray-100">
+					<p class="text-xs font-bold text-gray-400 uppercase mb-2">Relevant Coursework</p>
+					<p class="text-sm text-gray-600 italic">{academicHistory.relevantCoursework.join(", ")}</p>
+				</div>
+			</section>
+
+			<!-- Additional Information -->
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+				<section>
+					<h2 class="section-title">Languages</h2>
+					<div class="space-y-2">
+						{languages.map(lang => (
+							<div class="flex justify-between text-sm">
+								<span class="font-bold">{lang.language}</span>
+								<span class="text-gray-500 italic">{lang.proficiency}</span>
+							</div>
+						))}
+					</div>
+				</section>
+				<section>
+					<h2 class="section-title">Personal Attributes</h2>
+					<p class="text-sm text-gray-700 leading-relaxed font-medium">
+						Adaptive learner with a focus on cross-functional collaboration. Experienced in remote work environments and international student relations. Passionate about AI integration and emerging web standards.
+					</p>
+				</section>
+			</div>
+		</div>
+
+		<footer class="max-w-[900px] mx-auto mt-12 text-center text-gray-400 text-[10px] no-print">
+			<p>CURRICULUM VITAE • {profile.name} • GENERATED 2026</p>
+		</footer>
+	</body>
+</html>

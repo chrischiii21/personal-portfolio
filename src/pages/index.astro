@@ -1,615 +1,258 @@
 ---
 import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Footer from "../components/Footer.astro";
 
 const profile = {
-	name: "Christy Montejo",
-	title: "Front-end Web Developer | UI/UX Designer",
-	location: "Cebu City, Philippines",
-	email: "christy@example.com",
-	github: "github.com/christymontejo",
-	linkedin: "linkedin.com/in/christymontejo",
-	website: "christymontejo.dev",
+  name: "Christy Montejo",
+  title: "Front-end Web Developer | UI/UX Designer",
+  location: "Cebu City, Philippines",
+  email: "christymontejo2003@gmail.com",
+  github: "github.com/chrischiii21",
+  linkedin: "christymontejo2003@gmail.com",
+  website: "christy-montejo.vercel.app",
 };
 
 const summary = `Front-end developer and UI/UX designer specializing in high-performance web applications built with Astro, React, and Tailwind CSS. I focus on "sales-first" design philosophies—creating digital experiences for trade-specific industries that prioritize lead generation and conversion optimization.`;
 
 const skills = [
-	{
-		category: "Languages",
-		items: ["JavaScript", "TypeScript", "HTML5", "CSS3"],
-	},
-	{
-		category: "Frameworks",
-		items: ["React", "Astro", "Tailwind CSS", "Vite"],
-	},
-	{ category: "Tools", items: ["Git", "GitHub", "Figma", "Node.js", "Bun"] },
-	{
-		category: "Focus",
-		items: ["UI/UX Design", "CRO", "Performance", "Responsive Design"],
-	},
+  {
+    category: "Development",
+    items: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Astro",
+      "Tailwind CSS",
+      "Vite",
+      "Node.js",
+    ],
+  },
+  {
+    category: "Design & Optimization",
+    items: [
+      "UI/UX Design",
+      "Figma",
+      "CRO",
+      "Performance Optimization",
+      "Responsive Design",
+    ],
+  },
 ];
 
 const experience = [
-	{
-		title: "IT Intern (OJT)",
-		company: "N-compass TV",
-		period: "January 2026 – May 2026",
-		points: [
-			"Designed UI/UX for internal tools and platform features",
-			"Developed comprehensive template galleries for various trades",
-			"Created specialized HVAC and Electrician trade templates",
-			"Performed QA testing on channels and showcase modules of the company website",
-		],
-	},
-	{
-		title: "Part Time Data Encoder [Outsourced]",
-		company: "Dedale",
-		period: "2025 – Present",
-		points: [
-			"Refined and managed prompt engineering workflows",
-			"Edited and formatted prompt outputs for consistency and quality",
-			"Managed data entry and updates on the official company platform",
-		],
-	},
-	{
-		title: "ESL Teaching (Chinese Students)",
-		company: "Happy Planet Company",
-		period: "2024 – 2025",
-		points: [
-			"Conducted English language lessons for Chinese students",
-			"Developed personalized learning plans to improve student communication skills",
-		],
-	},
+  {
+    title: "IT Intern (OJT)",
+    company: "N-compass TV",
+    period: "Jan 2026 – May 2026",
+    location: "Cebu City",
+    points: [
+      "Designed UI/UX for internal tools and platform features",
+      "Developed comprehensive template galleries for various trades",
+      "Performed QA testing on showcase modules",
+    ],
+  },
+  {
+    title: "Data Encoder",
+    company: "Dedale",
+    period: "2025 – Present",
+    location: "Remote",
+    points: [
+      "Refined and managed prompt engineering workflows",
+      "Edited and formatted prompt outputs for consistency",
+    ],
+  },
+  {
+    title: "ESL Teacher",
+    company: "Happy Planet",
+    period: "2024 – 2025",
+    location: "Remote",
+    points: [
+      "Conducted English language lessons for international students",
+      "Developed personalized communication strategies",
+    ],
+  },
 ];
 
 const projects = [
-	{
-		name: "Internship Tracker",
-		description: "Professional management dashboard for tracking internship hours and administrative progress in real-time.",
-		tech: ["Next.js", "Tailwind CSS", "Clockify API", "NextAuth.js"],
-		url: "internship-tracker-self.vercel.app",
-		highlights: [
-			"Real-time Clockify API integration",
-			"Automated DTR and sync log generation",
-		],
-	},
-	{
-		name: "TicketFlow (Ticket Automation)",
-		description: "Visual automation tool for generating high-quality, numbered tickets and certificates from custom image templates.",
-		tech: ["React", "Tailwind CSS", "Canvas API", "pdf-lib"],
-		url: "ticket-automation-two.vercel.app",
-		highlights: [
-			"Interactive visual hotspot editor",
-			"Bulk high-DPI PDF generation",
-		],
-	},
-	{
-		name: "Prompt Bucket",
-		description: "Community-driven library and creation suite for AI prompts, optimized for high-fidelity image and video generation.",
-		tech: ["Next.js", "Tailwind CSS", "PostgreSQL", "Lucide"],
-		url: "prompt-bucket.vercel.app",
-		highlights: [
-			"Integrated Director's Suite for video blueprints",
-			"Advanced prompt categorization and search",
-		],
-	},
-	{
-		name: "Hyperlinks",
-		description: "Utility for cleaning, formatting, and sanitizing raw text and links for professional documentation platforms.",
-		tech: ["React", "Tailwind CSS", "Clipboard API"],
-		url: "hyper-links.vercel.app",
-		highlights: [
-			"Automated link extraction and sanitization",
-			"Live rich-text formatting preview",
-		],
-	},
-	{
-		name: "Certify",
-		description: "Event management platform featuring automated certificate distribution and real-time claim tracking.",
-		tech: ["Next.js", "Tailwind CSS", "Vercel"],
-		url: "automated-certs.vercel.app",
-		highlights: [
-			"Integrated certificate template editor",
-			"Real-time event claim analytics",
-		],
-	},
+  {
+    name: "Internship Tracker",
+    description:
+      "Professional management dashboard for tracking internship hours and administrative progress in real-time.",
+    tech: ["Astro", "Python", "TypeScript", "JavaScript"],
+    url: "internship-tracker-self.vercel.app",
+  },
+  {
+    name: "TicketFlow",
+    description:
+      "Visual automation tool for generating high-quality, numbered tickets and certificates from custom templates.",
+    tech: ["Astro", "CSS", "JS"],
+    url: "ticket-automation-two.vercel.app",
+  },
+  {
+    name: "Prompt Bucket",
+    description:
+      "Community-driven library for AI prompts, optimized for high-fidelity image and video generation.",
+    tech: ["TypeScript", "Astro", "CSS", "JavaScript"],
+    url: "prompt-bucket.vercel.app",
+  },
+  {
+    name: "Hyperlinks",
+    description:
+      "Utility for cleaning, formatting, and sanitizing raw text and links for professional documentation platforms.",
+    tech: ["TypeScript", "Astro", "Other"],
+    url: "hyper-links.vercel.app",
+  },
+  {
+    name: "Certify",
+    description:
+      "Event management platform featuring automated certificate distribution and real-time claim tracking.",
+    tech: ["TypeScript", "CSS", "JavaScript"],
+    url: "automated-certs.vercel.app",
+  },
 ];
 
 const education = {
-	degree: "B.S. Information Technology",
-	school: "[University Name]",
-	period: "2022 – 2026",
-	location: "Cebu City, Philippines",
+  degree: "B.S. Information Technology",
+  school: "Cebu Technological University - Argao Campus",
+  period: "2022 – 2026",
 };
-
-const certifications = [];
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{profile.name} - Resume</title>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-	<body
-		class="bg-gradient-to-br from-slate-50 via-white to-slate-50 print:bg-white text-slate-900"
-	>
-		<!-- Download Button -->
-		<div class="fixed top-6 right-6 print:hidden z-50">
-			<button
-				onclick="window.print()"
-				class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold shadow-xl hover:shadow-2xl flex items-center gap-2 transition-all hover:scale-105"
-			>
-				<svg
-					class="w-5 h-5"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-					></path>
-				</svg>
-				Download PDF
-			</button>
-		</div>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{profile.name} — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .heading {
+        font-family: "Outfit", sans-serif;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
-		<!-- Resume Container -->
-		<div class="max-w-[1100px] mx-auto my-6 print:my-0 px-4">
-			<div
-				class="bg-white border border-slate-200 print:border-none rounded-2xl print:rounded-none shadow-2xl print:shadow-none overflow-hidden"
-			>
-				<!-- Header -->
-				<header
-					class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-10 py-10 print:p-6"
-				>
-					<div class="flex items-center gap-8">
-						<div class="flex-shrink-0">
-							<div
-								class="w-36 h-36 rounded-2xl border-4 border-white/10 overflow-hidden bg-white shadow-2xl"
-							>
-								<img
-									src="/IMG_0063.jpg"
-									alt={profile.name}
-									class="w-full h-full object-cover"
-								/>
-							</div>
-						</div>
-						<div class="flex-1">
-							<h1
-								class="text-5xl font-bold text-white mb-2 tracking-tight"
-							>
-								{profile.name}
-							</h1>
-							<p class="text-2xl text-slate-300 mb-6 font-medium">
-								{profile.title}
-							</p>
+      /* Creative Animations */
+      @keyframes morph {
+        0%,
+        100% {
+          border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+        }
+        34% {
+          border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+        }
+        67% {
+          border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+        }
+      }
+      @keyframes spin-slow {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .animate-blob {
+        animation: morph 8s ease-in-out infinite;
+      }
+      .animate-spin-slow {
+        animation: spin-slow 12s linear infinite;
+      }
+      .animate-bounce-slow {
+        animation: bounce 3s ease-in-out infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#0a0c10] text-slate-300 antialiased selection:bg-blue-500/30"
+  >
+    <!-- Subtle ambient background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div
+        class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-blue-600/5 blur-[120px] rounded-full"
+      >
+      </div>
+      <div
+        class="absolute bottom-[20%] -right-[10%] w-[40%] h-[40%] bg-indigo-600/5 blur-[120px] rounded-full"
+      >
+      </div>
+    </div>
 
-							<div
-								class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm text-slate-300"
-							>
-								<div class="flex items-center gap-3">
-									<svg
-										class="w-5 h-5 text-blue-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-											clip-rule="evenodd"></path>
-									</svg>
-									<span>{profile.location}</span>
-								</div>
-								<div class="flex items-center gap-3">
-									<svg
-										class="w-5 h-5 text-blue-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
-										<path
-											d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
-										></path>
-										<path
-											d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-										></path>
-									</svg>
-									<span>{profile.email}</span>
-								</div>
-								<div class="flex items-center gap-3">
-									<svg
-										class="w-5 h-5 text-blue-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
-											clip-rule="evenodd"></path>
-									</svg>
-									<span>{profile.github}</span>
-								</div>
-								<div class="flex items-center gap-3">
-									<svg
-										class="w-5 h-5 text-blue-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
-											clip-rule="evenodd"></path>
-									</svg>
-									<span>{profile.website}</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</header>
+    <Navbar profile={profile} />
 
-				<!-- Main Content -->
-				<main class="px-10 py-10 print:p-6">
-					<!-- Summary -->
-					<section class="mb-10">
-						<h2
-							class="text-2xl font-bold text-slate-900 mb-4 pb-3 border-b-2 border-slate-200 flex items-center gap-3"
-						>
-							<svg
-								class="w-6 h-6 text-blue-600"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-								></path>
-							</svg>
-							Professional Summary
-						</h2>
-						<p class="text-slate-700 leading-relaxed text-base">
-							{summary}
-						</p>
-					</section>
+    <div class="max-w-6xl mx-auto px-6 py-32 lg:py-48 relative z-10">
+      <Hero profile={profile} />
 
-					<!-- Skills -->
-					<section class="mb-10">
-						<h2
-							class="text-2xl font-bold text-slate-900 mb-4 pb-3 border-b-2 border-slate-200 flex items-center gap-3"
-						>
-							<svg
-								class="w-6 h-6 text-blue-600"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-								></path>
-							</svg>
-							Technical Skills
-						</h2>
-						<div class="grid grid-cols-2 gap-6">
-							{
-								skills.map((skillGroup) => (
-									<div>
-										<h3 class="text-sm font-bold text-slate-600 uppercase tracking-wider mb-3">
-											{skillGroup.category}
-										</h3>
-										<div class="flex flex-wrap gap-2">
-											{skillGroup.items.map((skill) => (
-												<span class="bg-blue-50 border border-blue-200 text-blue-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">
-													{skill}
-												</span>
-											))}
-										</div>
-									</div>
-								))
-							}
-						</div>
-					</section>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <!-- Left Column: Main Content -->
+        <div class="lg:col-span-8 space-y-20">
+          <About summary={summary} />
+          <Experience experience={experience} />
+          <Projects projects={projects} />
+        </div>
 
-					<!-- Experience -->
-					<section class="mb-10">
-						<h2
-							class="text-2xl font-bold text-slate-900 mb-4 pb-3 border-b-2 border-slate-200 flex items-center gap-3"
-						>
-							<svg
-								class="w-6 h-6 text-blue-600"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-								></path>
-							</svg>
-							Professional Experience
-						</h2>
-						<div class="space-y-8">
-							{
-								experience.map((job) => (
-									<div class="relative pl-8 border-l-2 border-blue-200">
-										<div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-sm" />
-										<div class="flex justify-between items-start mb-3">
-											<div>
-												<h3 class="text-xl font-bold text-slate-900">
-													{job.title}
-												</h3>
-												<p class="text-slate-600 font-medium">
-													{job.company}
-												</p>
-											</div>
-											<span class="text-slate-500 text-sm font-semibold whitespace-nowrap ml-4 bg-slate-100 px-3 py-1 rounded-full">
-												{job.period}
-											</span>
-										</div>
-										<ul class="space-y-2 text-slate-700">
-											{job.points.map((point) => (
-												<li class="flex items-start gap-3">
-													<span class="text-blue-600 mt-1 font-bold">
-														•
-													</span>
-													<span class="leading-relaxed">
-														{point}
-													</span>
-												</li>
-											))}
-										</ul>
-									</div>
-								))
-							}
-						</div>
-					</section>
+        <!-- Right Column: Sidebar -->
+        <Sidebar profile={profile} skills={skills} education={education} />
+      </div>
+    </div>
 
-					<!-- Projects -->
-					<section class="mb-10">
-						<h2
-							class="text-2xl font-bold text-slate-900 mb-4 pb-3 border-b-2 border-slate-200 flex items-center gap-3"
-						>
-							<svg
-								class="w-6 h-6 text-blue-600"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-								></path>
-							</svg>
-							Featured Projects
-						</h2>
-						<div class="space-y-6">
-							{
-								projects.map((project) => (
-									<div class="bg-slate-50 border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-										<div class="flex justify-between items-start mb-3">
-											<h3 class="text-xl font-bold text-slate-900">
-												{project.name}
-											</h3>
-											<a
-												href={`https://${project.url}`}
-												target="_blank"
-												class="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1"
-											>
-												{project.url}
-												<svg
-													class="w-4 h-4"
-													fill="none"
-													stroke="currentColor"
-													viewBox="0 0 24 24"
-												>
-													<path
-														stroke-linecap="round"
-														stroke-linejoin="round"
-														stroke-width="2"
-														d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-													/>
-												</svg>
-											</a>
-										</div>
-										<p class="text-slate-700 mb-4 leading-relaxed">
-											{project.description}
-										</p>
-										<div class="flex flex-wrap gap-2 mb-4">
-											{project.tech.map((tech) => (
-												<span class="bg-white border border-slate-300 text-slate-700 px-3 py-1 rounded-lg text-sm font-medium">
-													{tech}
-												</span>
-											))}
-										</div>
-										<ul class="space-y-2 text-slate-700">
-											{project.highlights.map(
-												(highlight) => (
-													<li class="flex items-start gap-2">
-														<svg
-															class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
-															fill="currentColor"
-															viewBox="0 0 20 20"
-														>
-															<path
-																fill-rule="evenodd"
-																d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-																clip-rule="evenodd"
-															/>
-														</svg>
-														<span class="leading-relaxed">
-															{highlight}
-														</span>
-													</li>
-												),
-											)}
-										</ul>
-									</div>
-								))
-							}
-						</div>
-					</section>
+    <Footer profile={profile} />
 
-					<!-- Education & Certifications -->
-					<div class="grid md:grid-cols-2 gap-8">
-						<!-- Education -->
-						<section>
-							<h2
-								class="text-2xl font-bold text-slate-900 mb-4 pb-3 border-b-2 border-slate-200 flex items-center gap-3"
-							>
-								<svg
-									class="w-6 h-6 text-blue-600"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M12 14l9-5-9-5-9 5 9 5z"></path>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-									></path>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-									></path>
-								</svg>
-								Education
-							</h2>
-							<div
-								class="bg-slate-50 border border-slate-200 rounded-xl p-5"
-							>
-								<h3
-									class="text-lg font-bold text-slate-900 mb-1"
-								>
-									{education.degree}
-								</h3>
-								<p class="text-slate-600 font-medium">
-									{education.school}
-								</p>
-								<p class="text-slate-500 text-sm mt-1">
-									{education.location}
-								</p>
-								<p
-									class="text-slate-500 text-sm font-semibold mt-2 bg-slate-100 inline-block px-3 py-1 rounded-full"
-								>
-									{education.period}
-								</p>
-							</div>
-						</section>
+    <script>
+      // Subtle intersection observer for reveal effects
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("opacity-100", "translate-y-0");
+              entry.target.classList.remove("opacity-0", "translate-y-4");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-						<!-- Certifications -->
-						<section>
-							<h2
-								class="text-2xl font-bold text-slate-900 mb-4 pb-3 border-b-2 border-slate-200 flex items-center gap-3"
-							>
-								<svg
-									class="w-6 h-6 text-blue-600"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-									></path>
-								</svg>
-								Certifications
-							</h2>
-							<ul class="space-y-3">
-								{
-									certifications.map((cert) => (
-										<li class="flex items-start gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4">
-											<svg
-												class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
-												fill="currentColor"
-												viewBox="0 0 20 20"
-											>
-												<path
-													fill-rule="evenodd"
-													d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-													clip-rule="evenodd"
-												/>
-											</svg>
-											<span class="text-slate-700 font-medium">
-												{cert}
-											</span>
-										</li>
-									))
-								}
-							</ul>
-						</section>
-					</div>
-				</main>
-
-				<!-- Footer -->
-				<footer
-					class="bg-slate-50 border-t border-slate-200 px-10 py-6 print:p-4 text-center"
-				>
-					<p class="text-slate-600 text-sm">
-						Last updated: {
-							new Date().toLocaleDateString("en-US", {
-								year: "numeric",
-								month: "long",
-							})
-						}
-					</p>
-				</footer>
-			</div>
-		</div>
-
-		<style>
-			* {
-				font-family:
-					"Inter",
-					-apple-system,
-					BlinkMacSystemFont,
-					"Segoe UI",
-					sans-serif;
-			}
-
-			@media print {
-				body {
-					background: white;
-					margin: 0;
-					padding: 0;
-				}
-				.max-w-\[1100px\] {
-					max-width: 100%;
-					margin: 0;
-					padding: 0;
-				}
-				@page {
-					margin: 0.5in;
-				}
-			}
-		</style>
-	</body>
+      document.querySelectorAll("section, .glass-card").forEach((el) => {
+        el.classList.add(
+          "transition-all",
+          "duration-700",
+          "opacity-0",
+          "translate-y-4"
+        );
+        observer.observe(el);
+      });
+    </script>
+  </body>
 </html>
