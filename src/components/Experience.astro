@@ -1,35 +1,32 @@
 ---
-const { experiences } = Astro.props;
+const { experience } = Astro.props;
 ---
-
-<div>
-    <h2 class="text-3xl font-bold text-[#05080b] mb-6">Experience</h2>
-    <div class="relative">
-        <div class="absolute left-[7px] top-2 bottom-2 w-0.5 bg-[#93bfe9]/30">
-        </div>
-        <div class="space-y-8">
-            {
-                experiences.map(
-                    (exp: {
-                        title: string;
-                        company: string;
-                        period: string;
-                    }) => (
-                        <div class="relative pl-8">
-                            <div class="absolute left-0 top-1 w-4 h-4 bg-[#56a2e8] rounded-full border-4 border-[#f5f8fb]" />
-                            <h3 class="text-xl font-bold text-[#05080b]">
-                                {exp.title}
-                            </h3>
-                            <p class="text-[#103a62] font-medium mb-1">
-                                {exp.company}
-                            </p>
-                            <p class="text-sm text-[#103a62]/70">
-                                {exp.period}
-                            </p>
-                        </div>
-                    ),
-                )
-            }
-        </div>
+<section id="experience">
+    <h2 class="heading text-sm font-bold uppercase tracking-[0.2em] text-blue-500 mb-10 flex items-center gap-4">
+        Experience
+        <div class="h-px flex-1 bg-white/5"></div>
+    </h2>
+    <div class="space-y-12">
+        {experience.map(job => (
+            <div class="group relative">
+                <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
+                    <div>
+                        <h3 class="heading text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">{job.title}</h3>
+                        <p class="text-slate-400 font-medium text-lg">{job.company}</p>
+                    </div>
+                    <span class="text-slate-500 font-mono text-sm border border-white/10 px-4 py-1 rounded-full bg-white/5">
+                        {job.period}
+                    </span>
+                </div>
+                <ul class="space-y-3">
+                    {job.points.map(point => (
+                        <li class="flex items-start gap-3 text-slate-400">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
+                            <span class="leading-relaxed">{point}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ))}
     </div>
-</div>
+</section>

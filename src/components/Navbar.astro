@@ -1,0 +1,19 @@
+---
+const { profile } = Astro.props;
+---
+<nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 backdrop-blur-md border-b border-white/5 bg-[#0a0c10]/50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-3 group cursor-pointer">
+            <div class="w-10 h-10 rounded-xl overflow-hidden border border-white/20 p-0.5 bg-white/10 group-hover:border-blue-500 transition-all duration-500">
+                <img src="/IMG_0063.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0 transition-all" />
+            </div>
+            <span class="heading font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">{profile.name}</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-slate-500">
+            <a href="#" class="hover:text-white transition-colors">Home</a>
+            <a href="#about" class="hover:text-white transition-colors">About</a>
+            <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+            <a href="/cv" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all">Download CV</a>
+        </div>
+    </div>
+</nav>

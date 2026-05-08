@@ -1,10 +1,12 @@
 ---
-const { bio } = Astro.props;
+const { summary } = Astro.props;
 ---
-
-<section>
-    <h2 class="text-3xl font-bold text-[#05080b] mb-6">About</h2>
-    <div class="space-y-4 text-[#103a62]/90 leading-relaxed text-lg">
-        {bio.map((paragraph: string) => <p set:html={paragraph} />)}
-    </div>
+<section id="about">
+    <h2 class="heading text-sm font-bold uppercase tracking-[0.2em] text-blue-500 mb-6 flex items-center gap-4">
+        About
+        <div class="h-px flex-1 bg-white/5"></div>
+    </h2>
+    <p class="text-xl text-slate-300 leading-relaxed font-light">
+        {summary}
+    </p>
 </section>
