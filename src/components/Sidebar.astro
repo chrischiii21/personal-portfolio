@@ -7,7 +7,7 @@ const { skills, education, profile } = Astro.props;
         <div class="space-y-8">
             {skills.map(group => (
                 <div>
-                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">{group.category}</h4>
+                    <h3 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">{group.category}</h3>
                     <div class="flex flex-wrap gap-2">
                         {group.items.map(skill => (
                             <span class="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-xs font-medium hover:border-blue-500/50 transition-colors">
@@ -20,9 +20,9 @@ const { skills, education, profile } = Astro.props;
         </div>
 
         <div class="mt-12 pt-8 border-t border-white/5">
-            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-6">Education</h4>
+            <h2 class="heading text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-6">Education</h2>
             <div class="space-y-1">
-                <h5 class="text-white font-bold">{education.degree}</h5>
+                <h3 class="text-white font-bold">{education.degree}</h3>
                 <p class="text-slate-400 text-sm">{education.school}</p>
                 <p class="text-slate-500 text-xs font-mono mt-2">{education.period}</p>
             </div>

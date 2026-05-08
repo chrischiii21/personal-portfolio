@@ -1,11 +1,19 @@
 ---
+import { Image } from 'astro:assets';
+import profileImage from '../assets/profile.jpg';
 const { profile } = Astro.props;
 ---
 <nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 backdrop-blur-md border-b border-white/5 bg-[#0a0c10]/50">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
         <div class="flex items-center gap-3 group cursor-pointer">
             <div class="w-10 h-10 rounded-xl overflow-hidden border border-white/20 p-0.5 bg-white/10 group-hover:border-blue-500 transition-all duration-500">
-                <img src="/IMG_0063.jpg" alt="Logo" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0 transition-all" />
+                <Image 
+                    src={profileImage} 
+                    alt="Logo" 
+                    width={80}
+                    height={80}
+                    class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0 transition-all" 
+                />
             </div>
             <span class="heading font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">{profile.name}</span>
         </div>

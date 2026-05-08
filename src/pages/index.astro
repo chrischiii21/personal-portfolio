@@ -7,6 +7,22 @@ import Experience from "../components/Experience.astro";
 import Projects from "../components/Projects.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
+import profileImage from "../assets/profile.jpg";
+import { getImage } from "astro:assets";
+
+const favicon = await getImage({
+  src: profileImage,
+  width: 48,
+  height: 48,
+  format: "png",
+});
+
+const lcpImage = await getImage({
+  src: profileImage,
+  width: 512,
+  height: 512,
+  format: "webp",
+});
 
 const profile = {
   name: "Christy Montejo",
@@ -129,16 +145,35 @@ const education = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio of Christy Montejo, a Front-end Web Developer & UI/UX Designer specializing in high-performance web applications." />
     <title>{profile.name} — Portfolio</title>
+    <link rel="icon" type="image/png" href={favicon.src} />
+    <link rel="preload" as="image" href={lcpImage.src} fetchpriority="high" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@600;700&display=swap"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@600;700&display=swap"
+      />
+    </noscript>
+
     <style>
       body {
-        font-family: "Inter", sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-display: swap;
       }
       .heading {
         font-family: "Outfit", sans-serif;
@@ -146,7 +181,12 @@ const education = {
       .glass-card {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(8px);
+      }
+      @media (max-width: 768px) {
+        .glass-card {
+          backdrop-filter: blur(4px); /* Lighter blur for mobile performance */
+        }
       }
       .gradient-text {
         background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
@@ -231,28 +271,36 @@ const education = {
     <Footer profile={profile} />
 
     <script>
-      // Subtle intersection observer for reveal effects
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("opacity-100", "translate-y-0");
-              entry.target.classList.remove("opacity-0", "translate-y-4");
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      document.querySelectorAll("section, .glass-card").forEach((el) => {
-        el.classList.add(
-          "transition-all",
-          "duration-700",
-          "opacity-0",
-          "translate-y-4"
+      const initReveal = () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("opacity-100", "translate-y-0");
+                entry.target.classList.remove("opacity-0", "translate-y-4");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
         );
-        observer.observe(el);
-      });
+
+        document.querySelectorAll("section, .glass-card").forEach((el) => {
+          el.classList.add(
+            "transition-all",
+            "duration-700",
+            "opacity-0",
+            "translate-y-4"
+          );
+          observer.observe(el);
+        });
+      };
+
+      if (window.requestIdleCallback) {
+        requestIdleCallback(() => initReveal());
+      } else {
+        setTimeout(initReveal, 100);
+      }
     </script>
   </body>
 </html>
