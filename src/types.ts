@@ -32,4 +32,6 @@ export interface Project {
   description: string;
   tech: string[];
   url: string;
+  /** Shown as a badge on the card, e.g. "in progress". */
+  status?: string;
 }

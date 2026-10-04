@@ -1,32 +1,16 @@
-import { useEffect, useState } from "react";
+import { toggleTheme, useIsDark } from "./theme";
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  function toggle() {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-  }
+  const isDark = useIsDark();
 
   return (
     <button
-      onClick={toggle}
-      aria-label="Toggle color theme"
-      className="w-8 h-8 flex items-center justify-center text-neutral-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+      onClick={() => toggleTheme()}
+      aria-label={isDark ? "Turn the lights on (light mode)" : "Turn the lights off (dark mode)"}
+      className="w-8 h-8 flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
     >
       {isDark ? (
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -35,12 +19,7 @@ export default function ThemeToggle() {
           />
         </svg>
       ) : (
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"

@@ -1,12 +1,18 @@
-import { useEffect } from "react";
-import ConsoleWindow from "./ConsoleWindow";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import Navbar from "./Navbar";
 import Hero from "./Hero";
 import About from "./About";
 import Experience from "./Experience";
+import Stack from "./Stack";
 import Projects from "./Projects";
-import Sidebar from "./Sidebar";
-import Footer from "./Footer";
+import Contact from "./Contact";
 import type { Profile, SkillGroup, Education, ExperienceEntry, Project } from "../types";
+import { prefersReducedMotion } from "./effects";
+import { depthIn, gsap, MOTION_OK, ScrollTrigger, useGSAP } from "./gsap";
+
+const Scene3D = lazy(() => import("./Scene3D"));
+
+const CONTAINER = "max-w-6xl mx-auto px-4 md:px-8";
 
 export const profile: Profile = {
   name: "Christy Montejo",
@@ -14,7 +20,7 @@ export const profile: Profile = {
   location: "Cebu City, Philippines",
   email: "christymontejo2003@gmail.com",
   github: "github.com/chrischiii21",
-  linkedin: "christymontejo2003@gmail.com",
+  linkedin: "www.linkedin.com/in/christy-montejo-a54807221",
   website: "christy-montejo.vercel.app",
 };
 
@@ -86,6 +92,14 @@ export const experience: ExperienceEntry[] = [
 
 export const projects: Project[] = [
   {
+    name: "Montejo's Lechon",
+    description:
+      "Our family business website for Montejo's Lechon & Food Trays in Argao, Cebu — menu, party packages, and ordering for charcoal-roasted lechon since 1994.",
+    tech: ["Astro", "TypeScript", "CSS", "JavaScript"],
+    url: "montejoslnft-online.vercel.app",
+    status: "in progress",
+  },
+  {
     name: "Internship Tracker",
     description:
       "Professional management dashboard for tracking internship hours and administrative progress in real-time.",
@@ -129,59 +143,99 @@ export const education: Education = {
 };
 
 export default function HomePage() {
+  const root = useRef<HTMLElement>(null);
+
+  // The WebGL scene is client-only and loaded lazily so it never blocks first paint.
+  const [showScene, setShowScene] = useState(false);
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("opacity-100", "translate-y-0");
-            entry.target.classList.remove("opacity-0", "translate-y-4");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const targets = document.querySelectorAll("#about, .glass-card, .reveal-item");
-    targets.forEach((el) => {
-      el.classList.add(
-        "transition-all",
-        "duration-700",
-        "opacity-0",
-        "translate-y-4"
-      );
-      const siblings = el.parentElement
-        ? Array.from(el.parentElement.children).filter((c) =>
-            c.matches(".glass-card, .reveal-item")
-          )
-        : [];
-      const staggerIndex = siblings.indexOf(el);
-      if (staggerIndex > 0) {
-        (el as HTMLElement).style.transitionDelay = `${Math.min(staggerIndex, 6) * 70}ms`;
-      }
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    if (!prefersReducedMotion()) setShowScene(true);
   }, []);
 
+  // Runs after every section has set up its own ScrollTriggers (parents mount
+  // last), so pin spacing from Projects is already in place.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MOTION_OK, () => {
+        gsap.utils.toArray<HTMLElement>("[data-depth]").forEach(depthIn);
+      });
+      // Every section panel tracks the cursor: a spotlight follows it, and the
+      // panel leans toward it in 3D. (The hero only gets the spotlight — its
+      // transform belongs to the scroll exit.)
+      const panels = gsap.utils.toArray<HTMLElement>(".section-card");
+      const cleanups = panels.map((panel) => {
+        const tilt = !panel.classList.contains("hero-card") && window.matchMedia(`${MOTION_OK} and (pointer: fine)`).matches;
+        const rx = tilt ? gsap.quickTo(panel, "rotationX", { duration: 0.9, ease: "power3.out" }) : null;
+        const ry = tilt ? gsap.quickTo(panel, "rotationY", { duration: 0.9, ease: "power3.out" }) : null;
+        if (tilt) gsap.set(panel, { transformPerspective: 2000 });
+
+        const onMove = (e: PointerEvent) => {
+          if (e.pointerType !== "mouse") return;
+          const r = panel.getBoundingClientRect();
+          panel.style.setProperty("--sx", `${e.clientX - r.left}px`);
+          panel.style.setProperty("--sy", `${e.clientY - r.top}px`);
+          rx?.(-((e.clientY - r.top) / r.height - 0.5) * 3);
+          ry?.(((e.clientX - r.left) / r.width - 0.5) * 4);
+        };
+        const onLeave = () => {
+          panel.style.removeProperty("--sx");
+          panel.style.removeProperty("--sy");
+          rx?.(0);
+          ry?.(0);
+        };
+        panel.addEventListener("pointermove", onMove);
+        panel.addEventListener("pointerleave", onLeave);
+        return () => {
+          panel.removeEventListener("pointermove", onMove);
+          panel.removeEventListener("pointerleave", onLeave);
+        };
+      });
+
+      // Web fonts change line lengths, so re-measure once they've loaded.
+      document.fonts?.ready.then(() => ScrollTrigger.refresh());
+
+      // In-page links glide instead of jumping (CSS smooth scroll fights ScrollTrigger pins).
+      const onClick = (e: MouseEvent) => {
+        const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+        const target = link && document.querySelector(link.getAttribute("href")!);
+        if (!target) return;
+        e.preventDefault();
+        const reduce = prefersReducedMotion();
+        gsap.to(window, {
+          duration: reduce ? 0 : 1.2,
+          ease: "power3.inOut",
+          scrollTo: { y: target, offsetY: target.id === "top" ? 0 : 80 },
+        });
+      };
+      document.addEventListener("click", onClick);
+      return () => {
+        document.removeEventListener("click", onClick);
+        cleanups.forEach((fn) => fn());
+      };
+    },
+    { scope: root }
+  );
+
   return (
-    <ConsoleWindow>
-      <div className="px-6 md:px-12 py-14 md:py-20">
-        <Hero profile={profile} />
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-8 space-y-20">
-            <About summary={summary} />
-            <Experience experience={experience} />
-            <Projects projects={projects} />
-          </div>
-
-          <Sidebar profile={profile} skills={skills} education={education} />
+    <>
+      {showScene && (
+        <Suspense fallback={null}>
+          <Scene3D />
+        </Suspense>
+      )}
+      <Navbar name={profile.name} />
+      <main ref={root} className="overflow-x-clip">
+        <div className={CONTAINER}>
+          <Hero profile={profile} current={experience[0]} education={education} />
+          <About profile={profile} summary={summary} education={education} experience={experience} />
+          <Experience experience={experience} />
+          <Stack skills={skills} />
         </div>
-      </div>
-
-      <Footer profile={profile} />
-    </ConsoleWindow>
+        <Projects projects={projects} />
+        <div className={CONTAINER}>
+          <Contact profile={profile} />
+        </div>
+      </main>
+    </>
   );
 }

@@ -5,7 +5,10 @@ const RESUME_PATH = "/Christy-Montejo-Resume.pdf";
 const RESUME_FILENAME = "Christy-Montejo-Resume.pdf";
 const TRANSITION_MS = 220;
 
-export default function CvPreview() {
+const DEFAULT_BUTTON =
+  "inline-flex items-center gap-2 border border-zinc-900/15 dark:border-white/15 px-5 py-3 text-sm font-medium text-zinc-900 dark:text-white hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors";
+
+export default function CvPreview({ className = DEFAULT_BUTTON, label = "Download CV" }: { className?: string; label?: string }) {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -40,9 +43,9 @@ export default function CvPreview() {
     <>
       <button
         onClick={openModal}
-        className="bg-blue-600 text-white px-5 py-2.5 font-medium hover:bg-blue-700 transition-colors"
+        className={className}
       >
-        [ Download CV ]
+        {label}
       </button>
 
       {mounted &&
@@ -54,19 +57,14 @@ export default function CvPreview() {
             onClick={closeModal}
           >
             <div
-              className={`w-full max-w-3xl h-full max-h-[85vh] border border-neutral-300 dark:border-white/10 bg-white dark:bg-[#0b0e14] shadow-2xl flex flex-col transition-all duration-200 ease-out ${
+              className={`w-full max-w-3xl h-full max-h-[85vh] border border-neutral-300 dark:border-white/10 bg-white dark:bg-zinc-950 shadow-2xl flex flex-col transition-all duration-200 ease-out ${
                 visible ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-3"
               }`}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-neutral-200 dark:border-white/10">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="flex items-center gap-1.5 flex-shrink-0">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/70"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/70"></span>
-                  </div>
-                  <span className="text-xs text-neutral-500 dark:text-slate-500 truncate">
+                                    <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400 truncate">
                     {RESUME_FILENAME}
                   </span>
                 </div>
@@ -74,9 +72,9 @@ export default function CvPreview() {
                   <a
                     href={RESUME_PATH}
                     download={RESUME_FILENAME}
-                    className="bg-blue-600 text-white px-4 py-1.5 text-xs font-medium hover:bg-blue-700 transition-colors"
+                    className="bg-emerald-500 text-zinc-950 px-4 py-1.5 text-xs font-medium hover:bg-emerald-400 transition-colors"
                   >
-                    [ Download ]
+                    Download
                   </a>
                   <button
                     onClick={closeModal}

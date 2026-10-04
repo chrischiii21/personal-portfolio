@@ -4,7 +4,7 @@ import HomePage, { profile } from "../components/HomePage.tsx";
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,46 +14,227 @@ import HomePage, { profile } from "../components/HomePage.tsx";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
+    />
+    <meta
+      name="description"
+      content={`${profile.name} — ${profile.title}, ${profile.location}.`}
     />
     <script is:inline>
       (function () {
+        const root = document.documentElement;
+        root.classList.add("js");
         const stored = localStorage.getItem("theme");
         if (stored !== "light") {
-          document.documentElement.classList.add("dark");
+          root.classList.add("dark");
         }
       })();
     </script>
     <style is:global>
-      body {
-        font-family: "JetBrains Mono", monospace;
+      /* Quiet surface floating over the 3D scene. */
+      .surface {
+        position: relative;
+        background: rgba(250, 250, 249, 0.86);
+        border: 1px solid rgba(9, 9, 11, 0.08);
+        backdrop-filter: blur(16px) saturate(1.3);
+        -webkit-backdrop-filter: blur(16px) saturate(1.3);
       }
-      .glass-card {
-        background: rgba(0, 0, 0, 0.015);
-        border: 1px solid rgba(0, 0, 0, 0.08);
+      .dark .surface {
+        background: rgba(13, 14, 17, 0.84);
+        border-color: rgba(255, 255, 255, 0.07);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
       }
-      .dark .glass-card {
-        background: rgba(255, 255, 255, 0.015);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+      /* One panel per section: the scene shows in the gaps, never behind text. */
+      .section-card {
+        padding: 1.5rem;
       }
-      @keyframes blink {
-        0%,
-        49% {
-          opacity: 1;
+      @media (min-width: 768px) {
+        .section-card {
+          padding: 3rem;
         }
-        50%,
-        100% {
+      }
+      @media (min-width: 1024px) {
+        .section-card {
+          padding: 4rem;
+        }
+      }
+      /* Section panels are soft glass: mostly see-through, but the strong blur
+         turns the dots behind text into a haze. A wide feathered glow in the
+         page color replaces the hard edge so the panel melts into the scene. */
+      .surface.section-card,
+      .surface.surface-soft {
+        background: rgba(244, 244, 242, 0.42);
+        border-color: rgba(9, 9, 11, 0.04);
+        backdrop-filter: blur(22px) saturate(1.1);
+        -webkit-backdrop-filter: blur(22px) saturate(1.1);
+        box-shadow: 0 0 90px 30px rgba(244, 244, 242, 0.35);
+      }
+      .dark .surface.section-card,
+      .dark .surface.surface-soft {
+        background: rgba(8, 9, 11, 0.4);
+        border-color: rgba(255, 255, 255, 0.04);
+        box-shadow: 0 0 90px 30px rgba(8, 9, 11, 0.45);
+      }
+
+      /* Cards inside a section panel become flat tiles, not panels-on-panels. */
+      .surface .surface:not(.surface-solid) {
+        background: rgba(9, 9, 11, 0.025);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+      }
+      .dark .surface .surface:not(.surface-solid) {
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      /* 3D-transformed surfaces lose backdrop blur, so they need a near-opaque face. */
+      .surface.surface-solid {
+        background: rgba(255, 255, 255, 0.95);
+      }
+      .dark .surface.surface-solid {
+        background: rgba(14, 15, 18, 0.94);
+      }
+      .surface.surface-nav {
+        background: rgba(244, 244, 242, 0.75);
+      }
+      .dark .surface.surface-nav {
+        background: rgba(8, 9, 11, 0.6);
+      }
+
+      /* The one serif word in each headline. */
+      h1 em,
+      h2 em {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        color: #059669;
+      }
+      .dark h1 em,
+      .dark h2 em {
+        color: #34d399;
+      }
+
+      /* Serif accent for use outside headings (the brand's second voice). */
+      .accent {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        color: #059669;
+      }
+      .dark .accent {
+        color: #34d399;
+      }
+      /* Only the first rotating word shows until GSAP takes over (and without JS). */
+      .rotator-word:not(:first-child) {
+        visibility: hidden;
+      }
+
+      /* Cursor spotlight on every section panel (position set from JS). */
+      .section-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(520px circle at var(--sx, -999px) var(--sy, -999px), rgba(16, 185, 129, 0.11), transparent 65%);
+      }
+      .section-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Hide intro elements until GSAP takes them over, so they never flash in
+         their final state first. The delayed animation is a safety net in case
+         the script never runs. */
+      @media (prefers-reduced-motion: no-preference) {
+        html.js [data-intro] {
+          visibility: hidden;
+          animation: intro-fallback 0s 4s forwards;
+        }
+      }
+      @keyframes intro-fallback {
+        to {
+          visibility: visible;
+        }
+      }
+
+      @keyframes fade-in {
+        from {
           opacity: 0;
         }
       }
-      .cursor-blink {
-        animation: blink 1s step-end infinite;
+      .scene-fade-in {
+        animation: fade-in 1.6s ease-out;
+      }
+      .nav-in {
+        animation: fade-in 1s ease-out 0.8s backwards;
+      }
+
+      .tilt-card {
+        position: relative;
+        transform-style: preserve-3d;
+        transition:
+          transform 0.3s ease-out,
+          border-color 0.3s,
+          background-color 0.3s;
+      }
+      .tilt-glare {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+        background: radial-gradient(
+          circle at var(--mx, 50%) var(--my, 50%),
+          rgba(16, 185, 129, 0.1),
+          transparent 60%
+        );
+      }
+      .tilt-card:hover .tilt-glare {
+        opacity: 1;
+      }
+
+      /* Theme switch "room light" (built by theme.ts): darkness with a soft hole
+         cut from above the screen; --reach grows the hole. The clear core is 55%
+         of the reach and the rest feathers, so the light never has a hard edge. */
+      .room-light {
+        --reach: 0;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 60% 50% at 50% 0%, #ffffff, transparent 70%),
+          #f4f4f2;
+        -webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% -15%, #000 calc(var(--reach) * 0.55%), transparent calc(var(--reach) * 1%));
+        mask-image: radial-gradient(ellipse 120% 90% at 50% -15%, #000 calc(var(--reach) * 0.55%), transparent calc(var(--reach) * 1%));
+      }
+      .room-dark {
+        --reach: 0;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        pointer-events: none;
+        background: #08090b;
+        -webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% -15%, transparent calc(var(--reach) * 0.55%), #000 calc(var(--reach) * 1%));
+        mask-image: radial-gradient(ellipse 120% 90% at 50% -15%, transparent calc(var(--reach) * 0.55%), #000 calc(var(--reach) * 1%));
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .scene-fade-in,
+        .nav-in {
+          animation: none;
+        }
+        .tilt-card {
+          transition: none;
+        }
       }
     </style>
   </head>
   <body
-    class="bg-neutral-200 text-neutral-700 dark:bg-[#050609] dark:text-slate-300 antialiased selection:bg-emerald-500/30 transition-colors duration-300"
+    class="bg-paper text-zinc-700 dark:bg-ink dark:text-zinc-300 font-sans antialiased selection:bg-emerald-500/25 transition-colors duration-300"
   >
     <HomePage client:load />
   </body>
