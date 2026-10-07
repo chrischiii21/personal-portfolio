@@ -84,35 +84,120 @@ function usePointer() {
   return ref;
 }
 
-function Terrain({ materialRef }: { materialRef: RefObject<THREE.PointsMaterial | null> }) {
+type TerrainUniforms = {
+  uTime: { value: number };
+  uScale: { value: number };
+  uOpacity: { value: number };
+  uLow: { value: THREE.Color };
+  uPeak: { value: THREE.Color };
+};
+
+// Height is computed on the GPU (was a per-frame CPU loop over every vertex).
+const TERRAIN_VERT = /* glsl */ `
+  uniform float uTime, uScale, uOpacity;
+  uniform vec3 uLow, uPeak;
+  varying vec3 vColor;
+  varying float vAlpha;
+  void main() {
+    vec3 p = position;
+    float t = uTime * 0.35;
+    // Keep a flat "valley" down the middle so the camera path stays clear.
+    float valley = min(1.0, abs(p.x) / 18.0);
+    float h = sin(p.x * 0.12 + t) * cos(p.z * 0.1 + t * 0.6) * 2.4
+            + sin(p.x * 0.31 - t * 0.8) * sin(p.z * 0.27 + t) * 0.9;
+    p.y = (h + 7.0) * valley * valley;
+
+    float peak = smoothstep(3.0, 9.5, p.y);
+    // A thin scanline sweeps toward the viewer, like a radar pass over the landscape.
+    float scan = pow(1.0 - abs(fract((p.z + uTime * 5.0) / 45.0) * 2.0 - 1.0), 18.0);
+
+    vec4 mv = modelViewMatrix * vec4(p, 1.0);
+    float depth = -mv.z;
+    vColor = mix(uLow, uPeak, peak + scan * 0.6);
+    // Fade with distance instead of fog, so the dots melt into whatever the page background is.
+    vAlpha = uOpacity * (0.7 + 0.6 * peak + scan * 1.5) * (1.0 - smoothstep(10.0, 58.0, depth)) * smoothstep(0.5, 3.0, depth);
+    gl_PointSize = (0.12 + peak * 0.05 + scan * 0.07) * uScale / depth;
+    gl_Position = projectionMatrix * mv;
+  }
+`;
+
+const TERRAIN_FRAG = /* glsl */ `
+  varying vec3 vColor;
+  varying float vAlpha;
+  void main() {
+    float d = length(gl_PointCoord - 0.5);
+    if (d > 0.5) discard;
+    gl_FragColor = vec4(vColor, vAlpha * (1.0 - smoothstep(0.15, 0.5, d)));
+    #include <colorspace_fragment>
+  }
+`;
+
+function Terrain({ uniforms }: { uniforms: TerrainUniforms }) {
   const geometry = useMemo(() => {
     const g = new THREE.PlaneGeometry(TERRAIN_SIZE, TERRAIN_SIZE, TERRAIN_SEGMENTS, TERRAIN_SEGMENTS);
     g.rotateX(-Math.PI / 2);
     return g;
   }, []);
-  const base = useMemo(() => Float32Array.from(geometry.attributes.position.array), [geometry]);
+  // Built by hand: R3F's <shaderMaterial uniforms> copies each uniform, so the Rig's
+  // per-frame writes to `uniforms` would never reach the GPU.
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        uniforms,
+        vertexShader: TERRAIN_VERT,
+        fragmentShader: TERRAIN_FRAG,
+        transparent: true,
+        depthWrite: false,
+      }),
+    [uniforms]
+  );
 
-  useFrame(({ clock }) => {
-    const t = clock.elapsedTime * 0.35;
-    const pos = geometry.attributes.position as THREE.BufferAttribute;
-    for (let i = 0; i < pos.count; i++) {
-      const x = base[i * 3];
-      const z = base[i * 3 + 2];
-      // Keep a flat "valley" down the middle so the camera path stays clear.
-      const valley = Math.min(1, Math.abs(x) / 18);
-      const h =
-        Math.sin(x * 0.12 + t) * Math.cos(z * 0.1 + t * 0.6) * 2.4 +
-        Math.sin(x * 0.31 - t * 0.8) * Math.sin(z * 0.27 + t) * 0.9;
-      pos.setY(i, h * valley * valley + valley * valley * 7);
-    }
-    pos.needsUpdate = true;
+  useFrame(({ clock, size, viewport }) => {
+    uniforms.uTime.value = clock.elapsedTime;
+    uniforms.uScale.value = size.height * viewport.dpr * 0.5; // matches three's sizeAttenuation
   });
 
   return (
     // Rendered as a dot matrix rather than a wireframe: quieter, and reads as "data landscape".
-    <points geometry={geometry} position={[0, -5, -40]}>
-      <pointsMaterial ref={materialRef} map={DOT} alphaTest={0.05} size={0.1} sizeAttenuation transparent depthWrite={false} />
-    </points>
+    // Shader displaces vertices, so the CPU-side bounding sphere is wrong — skip culling.
+    <points geometry={geometry} material={material} position={[0, -5, -40]} frustumCulled={false} />
+  );
+}
+
+// Wireframe solids along the flight path give the scroll a sense of travel.
+const LANDMARKS: { geometry: THREE.BufferGeometry; position: [number, number, number]; spin: number }[] =
+  typeof document === "undefined"
+    ? []
+    : [
+        { geometry: new THREE.IcosahedronGeometry(2.4, 1), position: [9, 2.5, -12], spin: 0.12 },
+        { geometry: new THREE.OctahedronGeometry(2), position: [-9, 1.5, -28], spin: -0.16 },
+        { geometry: new THREE.DodecahedronGeometry(2.2), position: [8.5, 0.5, -44], spin: 0.1 },
+        { geometry: new THREE.IcosahedronGeometry(3, 0), position: [-7.5, 0, -60], spin: -0.12 },
+      ].map((l) => ({ ...l, geometry: new THREE.EdgesGeometry(l.geometry) }));
+
+function Landmarks({ material }: { material: THREE.LineBasicMaterial }) {
+  const refs = useRef<(THREE.LineSegments | null)[]>([]);
+  useFrame(({ clock }) => {
+    const t = clock.elapsedTime;
+    refs.current.forEach((m, i) => {
+      if (!m) return;
+      const l = LANDMARKS[i];
+      m.rotation.set(t * l.spin * 0.6, t * l.spin, 0);
+      m.position.y = l.position[1] + Math.sin(t * 0.6 + i * 1.7) * 0.4;
+    });
+  });
+  return (
+    <>
+      {LANDMARKS.map((l, i) => (
+        <lineSegments
+          key={i}
+          ref={(el) => void (refs.current[i] = el)}
+          geometry={l.geometry}
+          position={l.position}
+          material={material}
+        />
+      ))}
+    </>
   );
 }
 
@@ -148,18 +233,30 @@ function Rig() {
   const scroll = useScrollProgress();
   const pointer = usePointer();
   const smooth = useRef({ scroll: 0, x: 0, y: 0 });
-  const gridMat = useRef<THREE.PointsMaterial>(null);
   const pointsMat = useRef<THREE.PointsMaterial>(null);
   const tmp = useMemo(() => ({ a: new THREE.Color(), b: new THREE.Color() }), []);
   const fog = useMemo(() => new THREE.Fog(THEME.dark.bg, 8, 55), []);
+  const terrain = useMemo<TerrainUniforms>(
+    () => ({
+      uTime: { value: 0 },
+      uScale: { value: 450 },
+      uOpacity: { value: 0 },
+      uLow: { value: new THREE.Color() },
+      uPeak: { value: new THREE.Color() },
+    }),
+    []
+  );
+  const lineMat = useMemo(() => new THREE.LineBasicMaterial({ transparent: true, depthWrite: false }), []);
 
   useEffect(() => {
     scene.fog = fog;
     const theme = isDark.current ? THEME.dark : THEME.light;
     fog.color.set(theme.bg);
-    gridMat.current?.color.set(theme.primary);
+    terrain.uLow.value.set(theme.primary);
+    terrain.uPeak.value.set(theme.secondary);
+    lineMat.color.set(theme.primary);
     pointsMat.current?.color.set(theme.primary);
-  }, [scene, fog, isDark]);
+  }, [scene, fog, isDark, terrain, lineMat]);
 
   useFrame((_, delta) => {
     const s = smooth.current;
@@ -174,11 +271,12 @@ function Rig() {
     const theme = isDark.current ? THEME.dark : THEME.light;
     // Hue journey: emerald at the top, drifting to blue by the projects section.
     const mix = THREE.MathUtils.smoothstep(s.scroll, 0.25, 0.85);
-    if (gridMat.current) {
-      tmp.a.set(theme.primary).lerp(tmp.b.set(theme.secondary), mix);
-      gridMat.current.color.lerp(tmp.a, k);
-      gridMat.current.opacity = theme.gridOpacity;
-    }
+    tmp.a.set(theme.primary).lerp(tmp.b.set(theme.secondary), mix);
+    terrain.uLow.value.lerp(tmp.a, k);
+    lineMat.color.lerp(tmp.a, k);
+    terrain.uPeak.value.lerp(tmp.b.set(theme.secondary), k);
+    terrain.uOpacity.value += (theme.gridOpacity - terrain.uOpacity.value) * k;
+    lineMat.opacity = theme.gridOpacity * 0.6;
     if (pointsMat.current) {
       // Particles run slightly ahead of the grid on the color journey.
       tmp.a.set(theme.primary).lerp(tmp.b.set(theme.secondary), Math.min(1, mix + 0.35));
@@ -190,7 +288,8 @@ function Rig() {
 
   return (
     <>
-      <Terrain materialRef={gridMat} />
+      <Terrain uniforms={terrain} />
+      <Landmarks material={lineMat} />
       <Particles materialRef={pointsMat} />
     </>
   );
