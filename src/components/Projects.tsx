@@ -1,20 +1,22 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Project } from "../types";
 import SectionHeading from "./SectionHeading";
 import { useTilt } from "./effects";
 import { depthIn, DESKTOP, gsap, MOTION_OK, useGSAP } from "./gsap";
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const tilt = useTilt<HTMLAnchorElement>(6);
+const shot = (project: Project) => `/projects/${project.url}.jpg`;
+
+function ProjectCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
+  const tilt = useTilt<HTMLButtonElement>(6);
 
   return (
     <div className="project-card flex lg:w-[440px] lg:h-[460px] lg:flex-shrink-0">
-      <a
-        href={`https://${project.url}`}
-        target="_blank"
-        rel="noreferrer"
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-haspopup="dialog"
         {...tilt}
-        className="tilt-card surface surface-solid group flex flex-col w-full p-7 md:p-8 hover:border-emerald-500/60"
+        className="tilt-card surface surface-solid group flex flex-col w-full p-7 md:p-8 text-left cursor-pointer hover:border-emerald-500/60"
       >
         <span aria-hidden className="tilt-glare" />
         <div className="flex items-start justify-between mb-auto">
@@ -54,18 +56,102 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <span className="text-sm text-zinc-500 dark:text-zinc-400 truncate group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
               {project.url}
             </span>
-            <span className="grid place-items-center w-9 h-9 flex-shrink-0 border border-zinc-900/15 dark:border-white/15 text-zinc-900 dark:text-white transition-all group-hover:bg-emerald-500 group-hover:border-emerald-500 group-hover:text-zinc-950 group-hover:rotate-45">
-              ↑
+            <span className="grid place-items-center w-9 h-9 flex-shrink-0 border border-zinc-900/15 dark:border-white/15 text-zinc-900 dark:text-white transition-all group-hover:bg-emerald-500 group-hover:border-emerald-500 group-hover:text-zinc-950 group-hover:rotate-90">
+              +
             </span>
           </div>
         </div>
-      </a>
+      </button>
     </div>
+  );
+}
+
+function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  const dialog = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (!project) return;
+    dialog.current!.showModal();
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [project]);
+
+  return (
+    <dialog
+      ref={dialog}
+      // "close" fires async; skip it if another card already reopened the dialog.
+      onClose={() => !dialog.current!.open && onClose()}
+      // Clicks on the backdrop land on the <dialog> itself.
+      onClick={(e) => e.target === dialog.current && dialog.current.close()}
+      aria-labelledby="project-modal-title"
+      className="m-auto w-[min(1280px,calc(100vw-2rem))] max-h-[calc(100dvh-2rem)] p-0 bg-transparent text-inherit backdrop:bg-black/75 backdrop:backdrop-blur-sm"
+    >
+      {project && (
+        <div className="surface surface-solid flex flex-col max-h-[calc(100dvh-2rem)]">
+          <div className="flex items-center justify-between gap-4 px-5 py-4 md:px-7 border-b border-zinc-900/10 dark:border-white/10">
+            <h3 id="project-modal-title" className="text-2xl md:text-3xl font-medium tracking-[-0.035em] text-zinc-900 dark:text-white">
+              {project.name}
+            </h3>
+            <button
+              type="button"
+              onClick={() => dialog.current!.close()}
+              aria-label="Close"
+              className="grid place-items-center w-9 h-9 flex-shrink-0 border border-zinc-900/15 dark:border-white/15 text-zinc-900 dark:text-white hover:bg-emerald-500 hover:border-emerald-500 hover:text-zinc-950 transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="overflow-y-auto lg:grid lg:grid-cols-[1fr_300px]">
+            <img
+              src={shot(project)}
+              alt={`Screenshot of ${project.name}`}
+              width={1280}
+              height={800}
+              className="block w-full h-auto border-b lg:border-b-0 lg:border-r border-zinc-900/10 dark:border-white/10"
+            />
+            <div className="flex flex-col justify-between gap-6 px-5 py-6 md:px-7">
+              <div>
+                {project.status && (
+                  <span className="inline-flex items-center gap-1.5 mb-3 border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-amber-700 dark:text-amber-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                    {project.status}
+                  </span>
+                )}
+                <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-400 mb-4 max-w-2xl">{project.description}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tech.map((t) => (
+                    <span
+                      className="border border-zinc-900/10 dark:border-white/10 px-2 py-0.5 font-mono text-[11px] text-zinc-600 dark:text-zinc-400"
+                      key={t}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <a
+                href={`https://${project.url}`}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center justify-center gap-3 px-5 py-3 bg-emerald-500 text-zinc-950 font-medium hover:bg-emerald-400 transition-colors"
+              >
+                Visit site
+                <span className="transition-transform group-hover:rotate-45">↑</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </dialog>
   );
 }
 
 export default function Projects({ projects }: { projects: Project[] }) {
   const root = useRef<HTMLElement>(null);
+  const [open, setOpen] = useState<Project | null>(null);
   const total = String(projects.length).padStart(2, "0");
 
   useGSAP(
@@ -156,7 +242,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
 
         <div className="project-track grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mx-auto px-4 md:px-8 lg:flex lg:max-w-none lg:w-max lg:mx-0 lg:gap-10 lg:px-[calc(50vw-220px)]">
           {projects.map((project, i) => (
-            <ProjectCard project={project} index={i} key={project.name} />
+            <ProjectCard project={project} index={i} key={project.name} onOpen={() => setOpen(project)} />
           ))}
         </div>
 
@@ -170,6 +256,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
         </div>
         </div>
       </div>
+      <ProjectModal project={open} onClose={() => setOpen(null)} />
     </section>
   );
 }

@@ -114,20 +114,6 @@ export const projects: Project[] = [
     url: "ticket-automation-two.vercel.app",
   },
   {
-    name: "Prompt Bucket",
-    description:
-      "Community-driven library for AI prompts, optimized for high-fidelity image and video generation.",
-    tech: ["TypeScript", "Astro", "CSS", "JavaScript"],
-    url: "prompt-bucket.vercel.app",
-  },
-  {
-    name: "Hyperlinks",
-    description:
-      "Utility for cleaning, formatting, and sanitizing raw text and links for professional documentation platforms.",
-    tech: ["TypeScript", "Astro", "Other"],
-    url: "hyper-links.vercel.app",
-  },
-  {
     name: "Certify",
     description:
       "Event management platform featuring automated certificate distribution and real-time claim tracking.",
