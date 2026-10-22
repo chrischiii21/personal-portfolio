@@ -118,7 +118,7 @@ export const projects: Project[] = [
     description:
       "Event management platform featuring automated certificate distribution and real-time claim tracking.",
     tech: ["TypeScript", "CSS", "JavaScript"],
-    url: "automated-certs.vercel.app",
+    url: "automate-n-certify.vercel.app",
   },
 ];
 
