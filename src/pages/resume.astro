@@ -1,0 +1,90 @@
+---
+// Printable résumé built from the same data as the homepage, so the two stay 1:1.
+// `npm run resume` prints this page to public/Christy-Montejo-Resume.pdf.
+import { profile, summary, experience, projects, education, skills } from "../components/HomePage.tsx";
+
+const contact = [
+  { label: profile.email, href: `mailto:${profile.email}` },
+  { label: profile.location },
+  { label: profile.website, href: `https://${profile.website}` },
+  { label: profile.linkedin.replace(/^www\./, ""), href: `https://${profile.linkedin}` },
+  { label: profile.github, href: `https://${profile.github}` },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>{profile.name} Resume</title>
+    <style is:inline>
+      @page { size: Letter; margin: 0.45in 0.55in; }
+      * { box-sizing: border-box; }
+      body { margin: 0 auto; max-width: 7.4in; padding: 16px; font: 10.25pt/1.36 Arial, Helvetica, sans-serif; color: #111; background: #fff; }
+      @media print { body { padding: 0; } }
+      a { color: inherit; text-decoration: none; }
+      h1 { margin: 0; font-size: 22pt; }
+      .title { margin: 2px 0 6px; font-size: 12pt; }
+      .contact { margin: 0; font-size: 9.5pt; }
+      /* inline-block: wraps between items, never inside a link (and never overflows, which makes Chrome shrink the whole page). */
+      .contact span { display: inline-block; white-space: nowrap; margin-right: 0.35em; }
+      .contact span:not(:last-child)::after { content: " |"; }
+      h2 { margin: 13px 0 6px; padding-bottom: 3px; border-bottom: 1px solid #111; font-size: 11pt; letter-spacing: 0.04em; text-transform: uppercase; }
+      p { margin: 0; }
+      .row { display: flex; justify-content: space-between; gap: 12px; }
+      .entry { margin-bottom: 8px; }
+      .muted { color: #444; }
+      ul { margin: 2px 0 0; padding-left: 18px; }
+      .project { margin-bottom: 6px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>{profile.name}</h1>
+      <p class="title">{profile.title}</p>
+      <p class="contact">
+        {contact.map((c) => <span>{c.href ? <a href={c.href}>{c.label}</a> : c.label}</span>)}
+      </p>
+    </header>
+
+    <h2>Summary</h2>
+    <p>{summary}</p>
+
+    <h2>Experience</h2>
+    {
+      experience.map((e) => (
+        <div class="entry">
+          <div class="row">
+            <strong>{e.title}, {e.company}</strong>
+            <span>{e.period}</span>
+          </div>
+          <p class="muted">{e.location}</p>
+          <ul>{e.points.map((p) => <li>{p}</li>)}</ul>
+        </div>
+      ))
+    }
+
+    <h2>Projects</h2>
+    {
+      projects.map((p) => (
+        <p class="project">
+          <strong>{p.name}</strong>
+          {p.status && <em> {p.status}</em>} — {p.description} ({p.tech.join(", ")}){" "}
+          <a href={`https://${p.url}`}>{p.url}</a>
+        </p>
+      ))
+    }
+
+    <h2>Education</h2>
+    <div class="row">
+      <strong>{education.degree}</strong>
+      <span>{education.period}</span>
+    </div>
+    <p class="muted">{education.school}</p>
+
+    <h2>Technical Skills</h2>
+    {skills.map((s) => <p><strong>{s.category}:</strong> {s.items.join(", ")}</p>)}
+  </body>
+</html>

@@ -1,0 +1,34 @@
+name: Sync résumé PDF
+
+# The résumé is printed from the homepage data, so any edit to it (local or via the CMS) regenerates the PDF.
+on:
+  push:
+    branches: [main]
+    paths:
+      - src/components/HomePage.tsx
+      - src/pages/resume.astro
+      - src/types.ts
+      - scripts/build-resume.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  resume:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run resume
+      - name: Commit if changed
+        run: |
+          git add public/Christy-Montejo-Resume.pdf
+          git diff --cached --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: sync résumé PDF with portfolio"
+          git push
