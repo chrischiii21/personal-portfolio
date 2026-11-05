@@ -2,7 +2,7 @@ import { useRef } from "react";
 import type { SkillGroup } from "../types";
 import Card from "./Card";
 import SectionHeading from "./SectionHeading";
-import { gsap, MOTION_OK, ScrollTrigger, useGSAP } from "./gsap";
+import { gsap, landIn, MOTION_OK, ScrollTrigger, useGSAP } from "./gsap";
 
 export default function Stack({ skills }: { skills: SkillGroup[] }) {
   const root = useRef<HTMLElement>(null);
@@ -37,16 +37,33 @@ export default function Stack({ skills }: { skills: SkillGroup[] }) {
           },
         });
 
-        gsap.utils.toArray<HTMLElement>(".skill-list").forEach((list) => {
-          gsap.from(list.children, {
-            autoAlpha: 0,
-            x: -10,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: "power2.out",
-            scrollTrigger: { trigger: list, start: "top 80%", toggleActions: "play none none reverse" },
-          });
+      });
+
+      // Wide screens: the discipline cards start as one deck in the middle and are dealt
+      // into place one per scroll step, like cards pulled from the project folder.
+      // The whole section pins (its panel is transformed by the cursor tilt, which breaks pinning inside it).
+      mm.add(`(min-width: 768px) and ${MOTION_OK}`, () => {
+        const cards = gsap.utils.toArray<HTMLElement>(".skill-card");
+        const grid = root.current!.querySelector<HTMLElement>(".skill-grid")!;
+        const toCenter = (el: HTMLElement) => {
+          const g = grid.getBoundingClientRect();
+          const r = el.getBoundingClientRect();
+          return g.left + g.width / 2 - (r.left + r.width / 2);
+        };
+        const deal = gsap.timeline({
+          scrollTrigger: { trigger: root.current, start: "bottom bottom", end: `+=${cards.length * 45}%`, pin: true, scrub: 0.6, invalidateOnRefresh: true },
         });
+        cards.forEach((card, i) => {
+          gsap.set(card, { zIndex: cards.length - i, transformPerspective: 1300 }); // first card dealt sits on top of the deck
+          deal
+            .from(card, { x: () => toCenter(card), y: 30, z: -120 - i * 40, rotateZ: (1 - i) * 6, rotateY: -18, duration: 1, ease: "power3.inOut" }, i)
+            .from(card.querySelectorAll("li"), { autoAlpha: 0, x: -10, duration: 0.4, stagger: 0.06 }, i + 0.6);
+        });
+      });
+
+      // Narrow screens: the cards stack in one column, so each just lands as it arrives.
+      mm.add(`(max-width: 767px) and ${MOTION_OK}`, () => {
+        gsap.utils.toArray<HTMLElement>(".skill-card").forEach(landIn);
       });
     },
     { scope: root }
@@ -70,21 +87,21 @@ export default function Stack({ skills }: { skills: SkillGroup[] }) {
               className="flex items-center text-4xl md:text-6xl font-medium tracking-[-0.04em] whitespace-nowrap text-zinc-900/80 dark:text-white/85"
             >
               {i % 4 === 1 ? <em className="font-serif italic font-normal text-emerald-600 dark:text-emerald-400">{item}</em> : item}
-              <span className="mx-8 md:mx-12 h-2 w-2 rounded-full bg-emerald-500/70" />
+              <span className="mx-8 md:mx-12 h-2 w-2 bg-emerald-500/70" />
             </span>
           ))}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="skill-grid grid grid-cols-1 md:grid-cols-3 gap-5 [transform-style:preserve-3d]">
         {skills.map((group, gi) => (
-          <Card key={group.category} label={`0${gi + 1}`} aside={`${group.items.length} tools`}>
+          <Card key={group.category} glass depth={false} className="skill-card" label={`0${gi + 1}`} aside={`${group.items.length} tools`}>
             <h3 className="font-serif italic text-[1.7rem] leading-tight text-zinc-900 dark:text-white mb-5">{group.category}</h3>
             <ul className="skill-list divide-y divide-zinc-900/10 dark:divide-white/10">
               {group.items.map((item) => (
                 <li key={item} className="flex items-center justify-between py-2.5 text-sm text-zinc-600 dark:text-zinc-400">
                   {item}
-                  <span className="h-1 w-1 rounded-full bg-emerald-500/60" />
+                  <span className="h-1 w-1 bg-emerald-500/60" />
                 </li>
               ))}
             </ul>

@@ -33,4 +33,15 @@ export function depthIn(el: Element) {
   );
 }
 
+/** Where a glass item starts before it "lands": below, pushed back, and flipped away, like an incoming message. */
+// No perspective here: inside a from() tween it would animate down to 0 and distort the
+// element mid-flight. Set it once with `gsap.set(el, { transformPerspective })` instead.
+export const LAND = { autoAlpha: 0, y: 70, z: -220, rotateX: -35, transformOrigin: "50% 100%" };
+
+/** Scroll-scrubbed landing for one item, so a list arrives one by one as you scroll through it. */
+export function landIn(el: Element) {
+  gsap.set(el, { transformPerspective: 1200 });
+  gsap.from(el, { ...LAND, ease: "back.out(1.4)", scrollTrigger: { trigger: el, start: "top 95%", end: "top 62%", scrub: 0.6 } });
+}
+
 export { gsap, ScrollTrigger, SplitText, useGSAP };

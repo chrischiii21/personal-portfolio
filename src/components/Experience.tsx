@@ -2,7 +2,7 @@ import { useRef } from "react";
 import type { ExperienceEntry } from "../types";
 import Card from "./Card";
 import SectionHeading from "./SectionHeading";
-import { gsap, MOTION_OK, useGSAP } from "./gsap";
+import { gsap, landIn, MOTION_OK, useGSAP } from "./gsap";
 
 export default function Experience({ experience }: { experience: ExperienceEntry[] }) {
   const root = useRef<HTMLElement>(null);
@@ -25,6 +25,8 @@ export default function Experience({ experience }: { experience: ExperienceEntry
         );
 
         gsap.utils.toArray<HTMLElement>(".timeline-entry").forEach((entry) => {
+          // Each role lands like an incoming message as it scrolls in.
+          landIn(entry.querySelector(".glass")!);
           const trigger = { trigger: entry, start: "top 60%", toggleActions: "play none none reverse" };
           gsap.to(entry.querySelector(".timeline-node"), {
             backgroundColor: "#10b981",
@@ -72,9 +74,9 @@ export default function Experience({ experience }: { experience: ExperienceEntry
             <li className="timeline-entry relative" key={`${job.company}-${job.title}`}>
               <span
                 aria-hidden
-                className="timeline-node absolute -left-8 md:-left-10 top-8 w-[11px] h-[11px] rounded-full border border-zinc-400 dark:border-white/25 bg-paper dark:bg-ink"
+                className="timeline-node absolute -left-8 md:-left-10 top-8 w-[11px] h-[11px] border border-zinc-400 dark:border-white/25 bg-paper dark:bg-ink"
               />
-              <Card>
+              <Card glass depth={false}>
                 <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 md:gap-6 mb-1">
                   <h3 className="text-xl md:text-2xl font-medium tracking-tight text-zinc-900 dark:text-white">{job.title}</h3>
                   <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400 whitespace-nowrap">{job.period}</span>

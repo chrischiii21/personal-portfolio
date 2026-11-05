@@ -34,4 +34,8 @@ export interface Project {
   url: string;
   /** Shown as a badge on the card, e.g. "in progress". */
   status?: string;
+  /** Square logo in /public, drawn on the project's card in the 3D folder. */
+  logo?: string;
+  /** Card background behind the logo (the project's own brand colour). */
+  color?: string;
 }

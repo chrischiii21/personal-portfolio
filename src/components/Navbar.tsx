@@ -39,7 +39,7 @@ export default function Navbar({ name }: { name: string }) {
             >
               {link.label}
               <span
-                className={`absolute left-1/2 -bottom-0.5 h-1 w-1 -translate-x-1/2 rounded-full bg-emerald-500 transition-opacity ${
+                className={`absolute left-1/2 -bottom-0.5 h-1 w-1 -translate-x-1/2 bg-emerald-500 transition-opacity ${
                   active === link.id ? "opacity-100" : "opacity-0"
                 }`}
               />

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
-import Hero from "./Hero";
+import Hero, { Landing } from "./Hero";
+import Reel from "./Reel";
 import About from "./About";
 import Experience from "./Experience";
 import Stack from "./Stack";
@@ -98,6 +99,17 @@ export const projects: Project[] = [
     tech: ["Astro", "TypeScript", "CSS", "JavaScript"],
     url: "montejoslnft-online.vercel.app",
     status: "in progress",
+    logo: "/projects/logos/montejoslnft-online.vercel.app.png",
+    color: "#140b07",
+  },
+  {
+    name: "Nook",
+    description:
+      "A cozy notebook that lives in your browser — notes, to-dos, sticky notes, and scrapbook pages with a photo booth, all encrypted locally with AES-256. No account needed.",
+    tech: ["JavaScript", "HTML", "CSS"],
+    url: "cozy-nook-olive.vercel.app",
+    logo: "/projects/logos/cozy-nook-olive.vercel.app.svg",
+    color: "#f6efe3",
   },
   {
     name: "Internship Tracker",
@@ -105,6 +117,8 @@ export const projects: Project[] = [
       "Professional management dashboard for tracking internship hours and administrative progress in real-time.",
     tech: ["Astro", "Python", "TypeScript", "JavaScript"],
     url: "internship-tracker-self.vercel.app",
+    logo: "/projects/logos/internship-tracker-self.vercel.app.png",
+    color: "#0b1120",
   },
   {
     name: "TicketFlow",
@@ -112,6 +126,8 @@ export const projects: Project[] = [
       "Visual automation tool for generating high-quality, numbered tickets and certificates from custom templates.",
     tech: ["Astro", "CSS", "JS"],
     url: "ticket-automation-two.vercel.app",
+    logo: "/projects/logos/ticket-automation-two.vercel.app.svg",
+    color: "#2457e6",
   },
   {
     name: "Certify",
@@ -119,6 +135,8 @@ export const projects: Project[] = [
       "Event management platform featuring automated certificate distribution and real-time claim tracking.",
     tech: ["TypeScript", "CSS", "JavaScript"],
     url: "automate-n-certify.vercel.app",
+    logo: "/projects/logos/automate-n-certify.vercel.app.svg",
+    color: "#f6f5f1",
   },
 ];
 
@@ -209,10 +227,14 @@ export default function HomePage() {
           <Scene3D />
         </Suspense>
       )}
+      <Landing profile={profile} />
       <Navbar name={profile.name} />
       <main ref={root} className="overflow-x-clip">
         <div className={CONTAINER}>
           <Hero profile={profile} current={experience[0]} education={education} />
+        </div>
+        <Reel profile={profile} projects={projects} skills={skills} experience={experience} />
+        <div className={CONTAINER}>
           <About profile={profile} summary={summary} education={education} experience={experience} />
           <Experience experience={experience} />
           <Stack skills={skills} />

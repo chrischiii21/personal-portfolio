@@ -5,7 +5,7 @@ import LinkIcon from "./LinkIcon";
 import SectionHeading from "./SectionHeading";
 import { emphasize } from "./Emphasis";
 import { profileLinks } from "./effects";
-import { gsap, MOTION_OK, SplitText, useGSAP } from "./gsap";
+import { gsap, landIn, MOTION_OK, SplitText, useGSAP } from "./gsap";
 
 export default function About({
   profile,
@@ -47,14 +47,7 @@ export default function About({
           }
         );
 
-        gsap.from(".fact-row", {
-          autoAlpha: 0,
-          y: 14,
-          duration: 0.7,
-          stagger: 0.07,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".facts", start: "top 78%", toggleActions: "play none none reverse" },
-        });
+        gsap.utils.toArray<HTMLElement>(".fact-row").forEach(landIn);
         return () => split.revert();
       });
     },

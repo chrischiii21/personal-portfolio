@@ -7,15 +7,18 @@ export default function Card({
   children,
   className = "",
   depth = true,
+  glass = false,
 }: {
   label?: string;
   aside?: ReactNode;
   children: ReactNode;
   className?: string;
   depth?: boolean;
+  /** Emerald glass tile (see `.glass` in index.astro) instead of the flat surface. */
+  glass?: boolean;
 }) {
   return (
-    <div data-depth={depth ? "" : undefined} className={`surface p-6 md:p-8 ${className}`}>
+    <div data-depth={depth ? "" : undefined} className={`${glass ? "glass" : "surface"} p-6 md:p-8 ${className}`}>
       {(label || aside) && (
         <div className="flex items-center justify-between gap-4 mb-6 font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">
           <span>{label}</span>

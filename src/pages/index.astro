@@ -25,6 +25,14 @@ import HomePage, { profile } from "../components/HomePage.tsx";
       (function () {
         const root = document.documentElement;
         root.classList.add("js");
+        // The landing reveals the name once fonts are in (never in a fallback face), and shows
+        // its scroll cue once the page has loaded. Capped so a slow font can't hold it back.
+        const fontsReady = () => root.classList.add("fonts-ready");
+        if (document.fonts) document.fonts.ready.then(fontsReady);
+        setTimeout(fontsReady, 2500);
+        addEventListener("load", () => root.classList.add("loaded"));
+        // The page is a story told on scroll, so a reload starts at the opening shot.
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
         const stored = localStorage.getItem("theme");
         if (stored !== "light") {
           root.classList.add("dark");
@@ -229,6 +237,42 @@ import HomePage, { profile } from "../components/HomePage.tsx";
         }
         .tilt-card {
           transition: none;
+        }
+      }
+      /* Until GSAP takes over, only the reel's first shot shows (its shots are stacked on one stage). */
+      @media (prefers-reduced-motion: no-preference) {
+        .js .reel-shot ~ .reel-shot {
+          visibility: hidden;
+        }
+      }
+      /* Emerald glass: the material of the project folder, carried into the chat, experience and toolkit. */
+      .glass {
+        position: relative;
+        background: linear-gradient(160deg, rgba(16, 185, 129, 0.1), rgba(255, 255, 255, 0.55) 45%), rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(5, 150, 105, 0.18);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 24px 60px -28px rgba(6, 78, 59, 0.35);
+        backdrop-filter: blur(14px) saturate(1.2);
+        -webkit-backdrop-filter: blur(14px) saturate(1.2);
+      }
+      .dark .glass {
+        background: linear-gradient(160deg, rgba(52, 211, 153, 0.11), rgba(255, 255, 255, 0.02) 45%), rgba(13, 14, 17, 0.62);
+        border-color: rgba(52, 211, 153, 0.16);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 24px 60px -24px rgba(0, 0, 0, 0.65);
+      }
+      @keyframes loadbar {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(300%);
+        }
+      }
+      @keyframes cue {
+        from {
+          transform: translateY(-100%);
+        }
+        to {
+          transform: translateY(200%);
         }
       }
     </style>
