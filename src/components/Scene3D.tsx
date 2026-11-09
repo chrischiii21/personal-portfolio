@@ -5,16 +5,16 @@ import * as THREE from "three";
 // Brand palette, kept in sync with the Tailwind classes used across the site.
 const THEME = {
   dark: {
-    bg: "#08090b", // ink
-    primary: "#34d399", // emerald-400
-    secondary: "#a7f3d0", // emerald-200 — a quiet drift, not a hue change
+    bg: "#0b111e", // ink
+    primary: "#7fb0ff", // brand-400
+    secondary: "#a0c8ff", // brand-300 — the monogram blue
     gridOpacity: 0.55,
     pointOpacity: 0.35,
   },
   light: {
     bg: "#f4f4f2", // paper
-    primary: "#059669", // emerald-600
-    secondary: "#0f766e", // teal-700
+    primary: "#2558e8", // brand-600
+    secondary: "#1d45b8", // brand-700
     gridOpacity: 0.5,
     pointOpacity: 0.3,
   },
@@ -269,7 +269,7 @@ function Rig() {
     camera.rotation.set(-0.08 + s.y * 0.04 + s.scroll * 0.06, -s.x * 0.06, s.scroll * 0.25 - 0.05);
 
     const theme = isDark.current ? THEME.dark : THEME.light;
-    // Hue journey: emerald at the top, drifting to blue by the projects section.
+    // Hue journey: accent blue at the top, drifting to the monogram blue by the projects section.
     const mix = THREE.MathUtils.smoothstep(s.scroll, 0.25, 0.85);
     tmp.a.set(theme.primary).lerp(tmp.b.set(theme.secondary), mix);
     terrain.uLow.value.lerp(tmp.a, k);

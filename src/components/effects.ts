@@ -34,7 +34,7 @@ export function profileLinks(profile: Profile) {
   return links.filter((l) => l.label === "email" || !l.value.includes("@"));
 }
 
-/** Cursor-follow 3D tilt with an emerald glare (see `.tilt-glare` in index.astro). */
+/** Cursor-follow 3D tilt with a brand-blue glare (see `.tilt-glare` in index.astro). */
 export function useTilt<T extends HTMLElement>(maxDeg = 8) {
   const ref = useRef<T>(null);
 

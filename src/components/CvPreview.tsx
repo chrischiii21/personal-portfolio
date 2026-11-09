@@ -6,7 +6,7 @@ const RESUME_FILENAME = "Christy-Montejo-Resume.pdf";
 const TRANSITION_MS = 220;
 
 const DEFAULT_BUTTON =
-  "inline-flex items-center gap-2 border border-zinc-900/15 dark:border-white/15 px-5 py-3 text-sm font-medium text-zinc-900 dark:text-white hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors";
+  "inline-flex items-center gap-2 border border-zinc-900/15 dark:border-white/15 px-5 py-3 text-sm font-medium text-zinc-900 dark:text-white hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 transition-colors";
 
 export default function CvPreview({ className = DEFAULT_BUTTON, label = "Download CV" }: { className?: string; label?: string }) {
   const [mounted, setMounted] = useState(false);
@@ -72,7 +72,7 @@ export default function CvPreview({ className = DEFAULT_BUTTON, label = "Downloa
                   <a
                     href={RESUME_PATH}
                     download={RESUME_FILENAME}
-                    className="bg-emerald-500 text-zinc-950 px-4 py-1.5 text-xs font-medium hover:bg-emerald-400 transition-colors"
+                    className="bg-brand-500 text-zinc-950 px-4 py-1.5 text-xs font-medium hover:bg-brand-400 transition-colors"
                   >
                     Download
                   </a>

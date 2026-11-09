@@ -107,7 +107,7 @@ function makeFace(project: Project, index: number, total: number) {
   const css = getComputedStyle(document.documentElement);
   const sans = css.getPropertyValue("--font-sans") || "system-ui, sans-serif";
   const mono = css.getPropertyValue("--font-mono") || "ui-monospace, monospace";
-  const bg = project.color ?? "#0d0e11";
+  const bg = project.color ?? "#0f1626";
   const dark = luminance(bg) < 0.55;
   const fg = dark ? "255,255,255" : "12,12,14";
   const pad = 36;
@@ -128,7 +128,7 @@ function makeFace(project: Project, index: number, total: number) {
     const status = (project.status ?? "live").toUpperCase();
     const sw = ctx.measureText(status).width;
     ctx.fillText(status, w - pad - sw, pad + 20);
-    ctx.fillStyle = project.status ? "#f59e0b" : "#10b981";
+    ctx.fillStyle = project.status ? "#f59e0b" : "#5b9bff";
     ctx.fillRect(w - pad - sw - 18, pad + 7, 9, 9);
 
     // Logos are square; draw them in a square box in the upper middle.
@@ -175,7 +175,8 @@ type CardProps = {
 function Card({ project, index, total, hovered, featured, exit, setHovered, onOpen, started }: CardProps) {
   const ref = useRef<THREE.Group>(null);
   const spread = index - (total - 1) / 2;
-  const base = { x: spread * 0.55, y: 0.72 - Math.abs(spread) * 0.08, z: 0.25 - Math.abs(spread) * 0.05, rz: -spread * 0.12 };
+  // Right-hand cards sit a touch further back so mirrored pairs never share a depth (z-fighting with an even count).
+  const base = { x: spread * 0.55, y: 0.72 - Math.abs(spread) * 0.08, z: 0.25 - Math.abs(spread) * 0.05 - (spread > 0 ? 0.03 : 0), rz: -spread * 0.12 };
   const face = useMemo(() => makeFace(project, index, total), [project, index, total]);
   const image = useMemo(() => new THREE.MeshBasicMaterial({ map: face, toneMapped: false }), [face]);
   const frame = useMemo(() => new THREE.MeshPhysicalMaterial({ color: "#0a0a0a", roughness: 0.35, clearcoat: 1 }), []);
@@ -241,18 +242,18 @@ function Folder({ projects, hovered, featured, exit, setHovered, onOpen }: Omit<
   // When the cards start rising out of the pocket (set on the first frame).
   const started = useRef<number | null>(null);
   const label = useMemo(() => makeLabel(projects.length), [projects.length]);
-  const back = useMemo(() => new THREE.MeshPhysicalMaterial({ color: "#10b981", roughness: 0.35, clearcoat: 1, clearcoatRoughness: 0.15 }), []);
+  const back = useMemo(() => new THREE.MeshPhysicalMaterial({ color: "#5b9bff", roughness: 0.35, clearcoat: 1, clearcoatRoughness: 0.15 }), []);
   const glass = useMemo(
     () =>
       new THREE.MeshPhysicalMaterial({
-        color: "#6ee7b7",
+        color: "#a0c8ff",
         transmission: 1,
         roughness: 0.38, // frosts whatever sits behind it
         thickness: 0.6,
         ior: 1.4,
         clearcoat: 1,
         clearcoatRoughness: 0.1,
-        attenuationColor: new THREE.Color("#10b981"),
+        attenuationColor: new THREE.Color("#5b9bff"),
         attenuationDistance: 2.5,
       }),
     []
@@ -319,7 +320,7 @@ function Folder({ projects, hovered, featured, exit, setHovered, onOpen }: Omit<
       </group>
       <ambientLight intensity={0.4} />
       <directionalLight position={[3, 4, 5]} intensity={1.6} />
-      <pointLight position={[0, 1.2, -1.5]} intensity={6} color="#34d399" />
+      <pointLight position={[0, 1.2, -1.5]} intensity={6} color="#7fb0ff" />
     </group>
   );
 }

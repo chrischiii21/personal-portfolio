@@ -5,7 +5,7 @@ import { prefersReducedMotion, useLocalTime, useTilt } from "./effects";
 import { gsap, MOTION_OK, ScrollTrigger, useGSAP } from "./gsap";
 
 // Each phrase comes straight from the summary.
-const QUALITIES = ["sales-first", "high-performance", "conversion-focused", "lead-generating"];
+const QUALITIES = ["purpose-built", "fully functional", "high-performance", "tailored"];
 
 export default function Hero({
   profile,
@@ -197,8 +197,8 @@ export default function Hero({
               className="flex items-center gap-2.5 mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400"
             >
               <span className="relative flex h-2 w-2">
-                <span className="absolute inset-0 bg-emerald-500 animate-ping opacity-60" />
-                <span className="relative h-2 w-2 bg-emerald-500" />
+                <span className="absolute inset-0 bg-brand-500 animate-ping opacity-60" />
+                <span className="relative h-2 w-2 bg-brand-500" />
               </span>
               <span className="hero-role">
                 {roles.join(" & ")} — {city}
@@ -225,7 +225,7 @@ export default function Hero({
               data-intro="pitch"
               className="text-2xl md:text-[2.1rem] leading-[1.25] tracking-tight text-zinc-600 dark:text-zinc-300 max-w-2xl mb-10"
             >
-              I design &amp; build websites that are{" "}
+              I build websites &amp; web apps that are{" "}
               <span className="rotator relative inline-grid overflow-hidden align-bottom pr-[0.15em] pb-[0.12em] -mb-[0.12em]">
                 {QUALITIES.map((q, i) => (
                   <em
@@ -244,7 +244,7 @@ export default function Hero({
                 href={`mailto:${profile.email}`}
                 onPointerMove={onMagnet}
                 onPointerLeave={offMagnet}
-                className="group inline-flex items-center gap-2 bg-emerald-500 text-zinc-950 px-6 py-3.5 text-sm font-medium hover:bg-emerald-400 transition-colors shadow-[0_10px_40px_-10px_rgba(16,185,129,0.7)]"
+                className="group inline-flex items-center gap-2 bg-brand-500 text-zinc-950 px-6 py-3.5 text-sm font-medium hover:bg-brand-400 transition-colors shadow-[0_10px_40px_-10px_rgba(91,155,255,0.7)]"
               >
                 Get in touch
                 <span className="transition-transform group-hover:translate-x-0.5">→</span>
@@ -273,7 +273,7 @@ export default function Hero({
             <span
               data-intro="frame"
               aria-hidden
-              className="absolute inset-0 translate-x-4 translate-y-4 border border-emerald-500/50"
+              className="absolute inset-0 translate-x-4 translate-y-4 border border-brand-500/50"
             />
             <div data-intro="photo" className="relative [clip-path:inset(0%_0%_0%_0%)]">
               <div {...photoTilt} className="tilt-card relative w-60 h-72 md:w-72 md:h-[23rem] overflow-hidden surface surface-solid p-0">
@@ -333,13 +333,13 @@ export function Landing({ profile }: { profile: Profile }) {
       <p className="landing-cue absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 opacity-0 transition-opacity duration-700 [.loaded_&]:opacity-100">
         Scroll
         <span className="relative h-10 w-px overflow-hidden bg-zinc-900/10 dark:bg-white/10">
-          <span className="absolute inset-x-0 top-0 h-1/2 bg-emerald-500 animate-[cue_1.6s_ease-in-out_infinite]" />
+          <span className="absolute inset-x-0 top-0 h-1/2 bg-brand-500 animate-[cue_1.6s_ease-in-out_infinite]" />
         </span>
       </p>
 
       {/* Loading line: sweeps until the page has loaded, then fades. */}
       <span className="absolute inset-x-0 bottom-0 h-0.5 overflow-hidden transition-opacity duration-700 [.loaded_&]:opacity-0">
-        <span className="block h-full w-1/3 bg-emerald-500 animate-[loadbar_1.4s_ease-in-out_infinite]" />
+        <span className="block h-full w-1/3 bg-brand-500 animate-[loadbar_1.4s_ease-in-out_infinite]" />
       </span>
     </div>
   );

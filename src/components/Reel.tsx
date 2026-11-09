@@ -2,11 +2,11 @@ import { useRef } from "react";
 import type { ExperienceEntry, Profile, Project, SkillGroup } from "../types";
 import { gsap, MOTION_OK, ScrollTrigger, SplitText, useGSAP } from "./gsap";
 
-const PROBLEMS = ["Slow load times", "Unclear message", "Weak call-to-action", "Low conversions"];
+const PROBLEMS = ["Slow load times", "Missing features", "Manual workflows", "Clunky tools"];
 const FIXES = [
-  { label: "Design", glyph: "◆" },
+  { label: "Function", glyph: "◆" },
   { label: "Speed", glyph: "⚡︎" },
-  { label: "Conversion", glyph: "↗" },
+  { label: "Scale", glyph: "↗" },
 ];
 const BARS = [28, 42, 36, 64, 92];
 const RING = 2 * Math.PI * 90;
@@ -105,7 +105,7 @@ export default function Reel({
       {/* 1 — Problem to fix */}
       <div className={shot}>
         <h2 className={`${line} max-w-5xl`}>
-          What if your website actually brought in <em>customers?</em>
+          What if your website actually did what you <em>need?</em>
         </h2>
         <div className="reel-browser glass w-[min(560px,90vw)] p-5 text-left">
           <div aria-hidden className="flex items-center justify-between mb-4">
@@ -123,18 +123,18 @@ export default function Reel({
                 className="reel-problem relative border border-zinc-900/10 dark:border-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-600 dark:text-zinc-300"
               >
                 {p}
-                <span aria-hidden className="reel-strike absolute left-1.5 right-1.5 top-1/2 h-px origin-left bg-emerald-500" />
+                <span aria-hidden className="reel-strike absolute left-1.5 right-1.5 top-1/2 h-px origin-left bg-brand-500" />
               </li>
             ))}
           </ul>
           <div aria-hidden className="flex items-end gap-3 h-32">
             {BARS.map((h, i) => (
-              <span key={i} className="reel-bar flex-1 bg-emerald-500/80" style={{ height: `${h}%` }} />
+              <span key={i} className="reel-bar flex-1 bg-brand-500/80" style={{ height: `${h}%` }} />
             ))}
           </div>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 mt-3 font-mono text-[11px] uppercase tracking-[0.16em]">
-            <span className="text-zinc-500 dark:text-zinc-400">Leads / month</span>
-            <span className="flex gap-4 text-emerald-600 dark:text-emerald-400">
+            <span className="text-zinc-500 dark:text-zinc-400">Features shipped</span>
+            <span className="flex gap-4 text-brand-600 dark:text-brand-400">
               {FIXES.map((f) => (
                 <span key={f.label} className="reel-fix">
                   <span aria-hidden>{f.glyph}</span> {f.label}
@@ -150,7 +150,7 @@ export default function Reel({
         <div className="relative grid place-items-center">
           <svg aria-hidden viewBox="0 0 200 200" className="w-56 h-56 md:w-64 md:h-64 -rotate-90">
             <circle cx="100" cy="100" r="90" fill="none" strokeWidth="6" className="stroke-zinc-900/10 dark:stroke-white/10" />
-            <circle className="reel-ring stroke-emerald-500" cx="100" cy="100" r="90" fill="none" strokeWidth="6" strokeLinecap="round" strokeDasharray={RING} />
+            <circle className="reel-ring stroke-brand-500" cx="100" cy="100" r="90" fill="none" strokeWidth="6" strokeLinecap="round" strokeDasharray={RING} />
           </svg>
           <div className="absolute text-center">
             <span className="reel-num block text-7xl md:text-8xl font-semibold tracking-[-0.05em] text-zinc-900 dark:text-white">{projects.length}</span>

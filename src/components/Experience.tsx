@@ -29,9 +29,9 @@ export default function Experience({ experience }: { experience: ExperienceEntry
           landIn(entry.querySelector(".glass")!);
           const trigger = { trigger: entry, start: "top 60%", toggleActions: "play none none reverse" };
           gsap.to(entry.querySelector(".timeline-node"), {
-            backgroundColor: "#10b981",
-            borderColor: "#10b981",
-            boxShadow: "0 0 0 5px rgba(16,185,129,0.15)",
+            backgroundColor: "#5b9bff",
+            borderColor: "#5b9bff",
+            boxShadow: "0 0 0 5px rgba(91, 155, 255,0.15)",
             duration: 0.4,
             scrollTrigger: trigger,
           });
@@ -69,7 +69,7 @@ export default function Experience({ experience }: { experience: ExperienceEntry
 
         <ol className="timeline relative lg:col-span-8 pl-8 md:pl-10 space-y-5">
           <div aria-hidden className="absolute left-[5px] top-4 bottom-4 w-px bg-zinc-900/10 dark:bg-white/10" />
-          <div aria-hidden className="timeline-fill absolute left-[5px] top-4 bottom-4 w-px origin-top bg-emerald-500" />
+          <div aria-hidden className="timeline-fill absolute left-[5px] top-4 bottom-4 w-px origin-top bg-brand-500" />
           {experience.map((job) => (
             <li className="timeline-entry relative" key={`${job.company}-${job.title}`}>
               <span
@@ -88,7 +88,7 @@ export default function Experience({ experience }: { experience: ExperienceEntry
                 <ul className="space-y-3">
                   {job.points.map((point) => (
                     <li className="point flex gap-3 text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400" key={point}>
-                      <span aria-hidden className="mt-[0.7em] h-px w-3 flex-shrink-0 bg-emerald-500" />
+                      <span aria-hidden className="mt-[0.7em] h-px w-3 flex-shrink-0 bg-brand-500" />
                       {point}
                     </li>
                   ))}

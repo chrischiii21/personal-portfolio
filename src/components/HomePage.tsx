@@ -17,7 +17,7 @@ const CONTAINER = "max-w-6xl mx-auto px-4 md:px-8";
 
 export const profile: Profile = {
   name: "Christy Montejo",
-  title: "Front-end Web Developer | UI/UX Designer",
+  title: "Web Developer | Web App Builder",
   location: "Cebu City, Philippines",
   email: "christymontejo2003@gmail.com",
   github: "github.com/chrischiii21",
@@ -25,7 +25,7 @@ export const profile: Profile = {
   website: "christy-montejo.vercel.app",
 };
 
-export const summary = `Front-end developer and UI/UX designer specializing in high-performance web applications built with Astro, React, and Tailwind CSS. I focus on "sales-first" design philosophies—creating digital experiences for trade-specific industries that prioritize lead generation and conversion optimization.`;
+export const summary = `Web developer building purpose-built websites and fully functional web applications with Astro, React, TypeScript, and Node.js. I start from what each project actually needs—dashboards, internal tools, client-facing platforms—and ship high-performance features tailored to how people really use them.`;
 
 export const skills: SkillGroup[] = [
   {
@@ -41,13 +41,12 @@ export const skills: SkillGroup[] = [
     ],
   },
   {
-    category: "Design & Optimization",
+    category: "Build & Optimization",
     items: [
-      "UI/UX Design",
-      "Figma",
-      "CRO",
+      "Web App Development",
       "Performance Optimization",
       "Responsive Design",
+      "Figma",
     ],
   },
   {
@@ -63,9 +62,19 @@ export const experience: ExperienceEntry[] = [
     period: "Jul 2026 – Present",
     location: "Cebu City",
     points: [
-      "Built web applications and high-conversion websites for company dealers, applying CRO-focused design to drive lead generation",
+      "Built web applications and websites for company dealers, shaping features and functionality around each dealer's needs",
       "Contributed franchise dashboard features to systematize and streamline the developer workflow",
       "Maintained and extended web features across internal tools and client-facing platforms",
+    ],
+  },
+  {
+    title: "AI Profile Support",
+    company: "Dedale Intelligence",
+    period: "Nov 2025 – Oct 2026",
+    location: "Remote",
+    points: [
+      "Outsourced to build AI profiles for the company's clients using Gemini and Claude",
+      "Formatted every profile to the company's standards for consistent, client-ready output",
     ],
   },
   {
@@ -74,7 +83,7 @@ export const experience: ExperienceEntry[] = [
     period: "Jan 2026 – May 2026",
     location: "Cebu City",
     points: [
-      "Designed UI/UX for internal tools and platform features",
+      "Built interfaces for internal tools and platform features",
       "Developed comprehensive template galleries for various trades",
       "Performed QA testing on showcase modules",
     ],
@@ -92,6 +101,15 @@ export const experience: ExperienceEntry[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    name: "Kwaderno",
+    description:
+      "An offline-first notebook for DepEd teachers — class records, attendance, automatic DepEd grade computation, SF2 and grade sheets, item analysis, AI-drafted lesson plans, and an RPMS portfolio, all from the phone's browser.",
+    tech: ["JavaScript", "PWA", "Claude"],
+    url: "meet-kwaderno.vercel.app",
+    logo: "/projects/logos/meet-kwaderno.vercel.app.svg",
+    color: "#0d5c4a",
+  },
   {
     name: "Montejo's Lechon",
     description:

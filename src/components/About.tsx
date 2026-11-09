@@ -57,12 +57,12 @@ export default function About({
   return (
     <section id="about" ref={root} className="scroll-mt-28 py-6 md:py-10">
       <div className="surface section-card">
-      <SectionHeading index="01" eyebrow="About" title={<>A developer who designs <em>for results</em>.</>} />
+      <SectionHeading index="01" eyebrow="About" title={<>A developer who builds <em>for purpose</em>.</>} />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <Card className="lg:col-span-7 md:p-10">
           <p className="about-summary text-2xl md:text-[2rem] leading-[1.3] tracking-tight text-zinc-900 dark:text-white">
-            {emphasize(summary, ["sales-first", "high-performance", "lead generation", "conversion optimization"])}
+            {emphasize(summary, ["purpose-built", "fully functional", "what each project actually needs", "high-performance"])}
           </p>
         </Card>
 
@@ -86,20 +86,20 @@ export default function About({
                   target={link.label === "email" ? undefined : "_blank"}
                   rel="noreferrer"
                   title={link.value}
-                  className="group flex items-center gap-4 h-full p-4 border border-zinc-900/10 dark:border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/[0.05] transition-colors"
+                  className="group flex items-center gap-4 h-full p-4 border border-zinc-900/10 dark:border-white/10 hover:border-brand-500/50 hover:bg-brand-500/[0.05] transition-colors"
                 >
-                  <span className="grid place-items-center w-11 h-11 flex-shrink-0 border border-zinc-900/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300 group-hover:bg-emerald-500 group-hover:border-emerald-500 group-hover:text-zinc-950 transition-colors">
+                  <span className="grid place-items-center w-11 h-11 flex-shrink-0 border border-zinc-900/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300 group-hover:bg-brand-500 group-hover:border-brand-500 group-hover:text-zinc-950 transition-colors">
                     <LinkIcon name={link.label} />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-[15px] font-medium text-zinc-900 dark:text-white">{link.name}</span>
-                    <span className="block truncate text-[13px] text-zinc-500 dark:text-zinc-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                    <span className="block truncate text-[13px] text-zinc-500 dark:text-zinc-400 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
                       {link.handle}
                     </span>
                   </span>
                   <span
                     aria-hidden
-                    className="flex-shrink-0 text-zinc-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-emerald-500"
+                    className="flex-shrink-0 text-zinc-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-500"
                   >
                     ↗
                   </span>

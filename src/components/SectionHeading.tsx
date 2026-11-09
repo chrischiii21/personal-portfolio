@@ -41,7 +41,7 @@ export default function SectionHeading({
   return (
     <div ref={root} data-depth={depth ? "" : undefined} className={className}>
       <div className="heading-eyebrow flex items-center gap-3 mb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
-        <span className="text-emerald-600 dark:text-emerald-400">{index}</span>
+        <span className="text-brand-600 dark:text-brand-400">{index}</span>
         <span className="heading-rule h-px w-10 bg-zinc-400/50 dark:bg-white/15 origin-left" />
         <span>{eyebrow}</span>
       </div>

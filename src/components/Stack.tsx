@@ -86,8 +86,8 @@ export default function Stack({ skills }: { skills: SkillGroup[] }) {
               key={`${item}-${i}`}
               className="flex items-center text-4xl md:text-6xl font-medium tracking-[-0.04em] whitespace-nowrap text-zinc-900/80 dark:text-white/85"
             >
-              {i % 4 === 1 ? <em className="font-serif italic font-normal text-emerald-600 dark:text-emerald-400">{item}</em> : item}
-              <span className="mx-8 md:mx-12 h-2 w-2 bg-emerald-500/70" />
+              {i % 4 === 1 ? <em className="font-serif italic font-normal text-brand-600 dark:text-brand-400">{item}</em> : item}
+              <span className="mx-8 md:mx-12 h-2 w-2 bg-brand-500/70" />
             </span>
           ))}
         </div>
@@ -101,7 +101,7 @@ export default function Stack({ skills }: { skills: SkillGroup[] }) {
               {group.items.map((item) => (
                 <li key={item} className="flex items-center justify-between py-2.5 text-sm text-zinc-600 dark:text-zinc-400">
                   {item}
-                  <span className="h-1 w-1 bg-emerald-500/60" />
+                  <span className="h-1 w-1 bg-brand-500/60" />
                 </li>
               ))}
             </ul>

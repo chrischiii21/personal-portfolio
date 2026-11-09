@@ -39,7 +39,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
               type="button"
               onClick={() => dialog.current!.close()}
               aria-label="Close"
-              className="grid place-items-center w-9 h-9 flex-shrink-0 border border-zinc-900/15 dark:border-white/15 text-zinc-900 dark:text-white hover:bg-emerald-500 hover:border-emerald-500 hover:text-zinc-950 transition-colors"
+              className="grid place-items-center w-9 h-9 flex-shrink-0 border border-zinc-900/15 dark:border-white/15 text-zinc-900 dark:text-white hover:bg-brand-500 hover:border-brand-500 hover:text-zinc-950 transition-colors"
             >
               ✕
             </button>
@@ -77,7 +77,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                 href={`https://${project.url}`}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center gap-3 px-5 py-3 bg-emerald-500 text-zinc-950 font-medium hover:bg-emerald-400 transition-colors"
+                className="group inline-flex items-center justify-center gap-3 px-5 py-3 bg-brand-500 text-zinc-950 font-medium hover:bg-brand-400 transition-colors"
               >
                 Visit site
                 <span className="transition-transform group-hover:rotate-45">↑</span>
@@ -150,7 +150,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
 
       <div
         ref={slot}
-        className="max-w-6xl mx-auto px-4 md:px-8 h-[520px] md:h-[640px] flex flex-col bg-[radial-gradient(ellipse_at_50%_42%,rgba(16,185,129,0.22),transparent_62%)]"
+        className="max-w-6xl mx-auto px-4 md:px-8 h-[520px] md:h-[640px] flex flex-col bg-[radial-gradient(ellipse_at_50%_42%,rgba(91,155,255,0.22),transparent_62%)]"
       >
         <div className="flex-1 min-h-0">
           {folderActive !== null && (
@@ -184,10 +184,10 @@ export default function Projects({ projects }: { projects: Project[] }) {
                   onFocus={() => setHovered(i)}
                   onBlur={() => setHovered(null)}
                   className={`glass flex items-center gap-2 px-4 py-2 text-sm transition-colors cursor-pointer ${
-                    on ? "border-emerald-500! text-zinc-900 dark:text-white" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                    on ? "border-brand-500! text-zinc-900 dark:text-white" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
                   }`}
                 >
-                  <span className={`font-mono text-[10px] ${on ? "text-emerald-500" : "text-zinc-400 dark:text-zinc-500"}`}>{String(i + 1).padStart(2, "0")}</span>
+                  <span className={`font-mono text-[10px] ${on ? "text-brand-500" : "text-zinc-400 dark:text-zinc-500"}`}>{String(i + 1).padStart(2, "0")}</span>
                   {p.name}
                   {p.status && <span className="w-1.5 h-1.5 bg-amber-500" title={p.status} />}
                 </button>
